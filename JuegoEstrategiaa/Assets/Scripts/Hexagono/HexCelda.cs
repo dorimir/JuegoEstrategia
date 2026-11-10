@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Tipos de terreno definidos en la especificación[cite: 1]
+// Tipos de terreno definidos en la especificaciï¿½n[cite: 1]
 public enum TipoTerreno
 {
     Llanura,
@@ -24,7 +24,7 @@ public class HexCelda : MonoBehaviour
     public int q;
     public int r;
 
-    [Header("Propiedades Tácticas")]
+    [Header("Propiedades Tï¿½cticas")]
     public TipoTerreno terreno;
     public TipoRecurso recurso = TipoRecurso.Ninguno;
     public int costeMovimiento = 1;
@@ -49,7 +49,7 @@ public class HexCelda : MonoBehaviour
 
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Asignación de colores según el terreno[cite: 1]
+        // Asignaciï¿½n de colores segï¿½n el terreno[cite: 1]
         switch (terreno)
         {
             case TipoTerreno.Bosque:
@@ -60,7 +60,7 @@ public class HexCelda : MonoBehaviour
             case TipoTerreno.Montana:
                 costeMovimiento = 3;
                 bonusDefensa = 4;
-                colorOriginal = new Color(0.5f, 0.5f, 0.5f); // Gris montaña
+                colorOriginal = new Color(0.5f, 0.5f, 0.5f); // Gris montaï¿½a
                 break;
             case TipoTerreno.Agua:
                 costeMovimiento = 999;
@@ -77,24 +77,31 @@ public class HexCelda : MonoBehaviour
         spriteRenderer.color = colorOriginal;
     }
 
-    // Detecta cuando el ratón ENTRA sobre la casilla
+    // Detecta cuando el ratï¿½n ENTRA sobre la casilla
     private void OnMouseEnter()
     {
         estaSobreVolando = true;
         ActualizarVisualizacion();
     }
 
-    // Detecta cuando el ratón SALE de la casilla
+    // Detecta cuando el ratï¿½n SALE de la casilla
     private void OnMouseExit()
     {
         estaSobreVolando = false;
         ActualizarVisualizacion();
     }
 
-    // Detecta el clic del ratón sobre la casilla
+    // Detecta el clic del ratï¿½n sobre la casilla
     private void OnMouseDown()
     {
         SelectionManager.Instancia.SeleccionarCelda(this);
+
+        // Movimiento: la unidad va hasta esta casilla usando A*
+        if (Unidad.Instancia != null)
+        {
+            Unidad.Instancia.IrHacia(this);
+        }
+
     }
 
     public void EstablecerSeleccionada(bool seleccionada)
@@ -104,18 +111,18 @@ public class HexCelda : MonoBehaviour
     }
 
     /// <summary>
-    /// Gestiona la prioridad visual: Selección > Hover > Color Original
+    /// Gestiona la prioridad visual: Selecciï¿½n > Hover > Color Original
     /// </summary>
     private void ActualizarVisualizacion()
     {
         if (estaSeleccionada)
         {
-            // Color de selección: Blanco brillante
+            // Color de selecciï¿½n: Blanco brillante
             spriteRenderer.color = Color.white;
         }
         else if (estaSobreVolando)
         {
-            // Color de Hover: Un todo más claro/brillante que el original
+            // Color de Hover: Un todo mï¿½s claro/brillante que el original
             spriteRenderer.color = colorOriginal * 1.35f;
         }
         else
