@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Tipos de terreno definidos en la especificaci�n[cite: 1]
+// Tipos de terreno definidos en la especificacion
 public enum TipoTerreno
 {
     Llanura,
@@ -24,7 +24,7 @@ public class HexCelda : MonoBehaviour
     public int q;
     public int r;
 
-    [Header("Propiedades T�cticas")]
+    [Header("Propiedades Tacticas")]
     public TipoTerreno terreno;
     public TipoRecurso recurso = TipoRecurso.Ninguno;
     public int costeMovimiento = 1;
@@ -49,7 +49,7 @@ public class HexCelda : MonoBehaviour
 
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Asignaci�n de colores seg�n el terreno[cite: 1]
+        // Asignacion de colores segun el terreno
         switch (terreno)
         {
             case TipoTerreno.Bosque:
@@ -60,7 +60,7 @@ public class HexCelda : MonoBehaviour
             case TipoTerreno.Montana:
                 costeMovimiento = 3;
                 bonusDefensa = 4;
-                colorOriginal = new Color(0.5f, 0.5f, 0.5f); // Gris monta�a
+                colorOriginal = new Color(0.5f, 0.5f, 0.5f); // Gris montana
                 break;
             case TipoTerreno.Agua:
                 costeMovimiento = 999;
@@ -77,31 +77,44 @@ public class HexCelda : MonoBehaviour
         spriteRenderer.color = colorOriginal;
     }
 
-    // Detecta cuando el rat�n ENTRA sobre la casilla
+    // Detecta cuando el raton ENTRA sobre la casilla
     private void OnMouseEnter()
     {
         estaSobreVolando = true;
         ActualizarVisualizacion();
     }
 
-    // Detecta cuando el rat�n SALE de la casilla
+    // Detecta cuando el raton SALE de la casilla
     private void OnMouseExit()
     {
         estaSobreVolando = false;
         ActualizarVisualizacion();
     }
 
-    // Detecta el clic del rat�n sobre la casilla
+    // Detecta el clic del raton sobre la casilla
     private void OnMouseDown()
     {
+        // Durante el turno de la IA el jugador no puede hacer nada
+        if (TurnManager.Instancia != null && TurnManager.Instancia.TurnoDeIA) return;
+
         SelectionManager.Instancia.SeleccionarCelda(this);
 
-        // Movimiento: la unidad va hasta esta casilla usando A*
-        if (Unidad.Instancia != null)
+        // Si hay una unidad del jugador actual en esta casilla, la seleccionamos
+        Unidad unidadAqui = Unidad.EnCelda(this);
+        if (unidadAqui != null)
         {
-            Unidad.Instancia.IrHacia(this);
+            if (TurnManager.Instancia == null || unidadAqui.jugadorId == TurnManager.Instancia.JugadorActual)
+            {
+                Unidad.Seleccionada = unidadAqui;
+            }
+            return;
         }
 
+        // Si no, movemos la unidad seleccionada hasta aqui (A*)
+        if (Unidad.Seleccionada != null)
+        {
+            Unidad.Seleccionada.IrHacia(this);
+        }
     }
 
     public void EstablecerSeleccionada(bool seleccionada)
@@ -111,18 +124,18 @@ public class HexCelda : MonoBehaviour
     }
 
     /// <summary>
-    /// Gestiona la prioridad visual: Selecci�n > Hover > Color Original
+    /// Gestiona la prioridad visual: Seleccion > Hover > Color Original
     /// </summary>
     private void ActualizarVisualizacion()
     {
         if (estaSeleccionada)
         {
-            // Color de selecci�n: Blanco brillante
+            // Color de seleccion: Blanco brillante
             spriteRenderer.color = Color.white;
         }
         else if (estaSobreVolando)
         {
-            // Color de Hover: Un todo m�s claro/brillante que el original
+            // Color de Hover: un tono mas claro/brillante que el original
             spriteRenderer.color = colorOriginal * 1.35f;
         }
         else
