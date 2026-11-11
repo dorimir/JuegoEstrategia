@@ -5,15 +5,21 @@ using UnityEngine;
 public class Unidad : MonoBehaviour
 {
     public static List<Unidad> Todas = new List<Unidad>();
-    public static Unidad Seleccionada;
+    public static Unidad Seleccionada { get; private set; }
+
+    private static HashSet<HexCelda> casillasResaltadas = new HashSet<HexCelda>();
 
     [Header("Propietario")]
-    public int jugadorId = 0; // 0 = Jugador 1, 1 = Jugador 2...
+    public int jugadorId = 0;
 
-    [Header("Configuracion")]
+    [Header("Configuración")]
     [SerializeField] private HexGridGenerator tablero;
     [SerializeField] private float velocidad = 3f;
     [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero;
+
+    [Header("Límite de Desplazamiento")]
+    [Tooltip("Número de casillas/pasos máximos que puede recorrer por turno")]
+    public int rangoMovimientoCasillas = 2;
 
     private HexCelda celdaActual;
     private bool enMovimiento;
@@ -30,17 +36,87 @@ public class Unidad : MonoBehaviour
     private void OnDestroy()
     {
         Todas.Remove(this);
-        if (Seleccionada == this) Seleccionada = null;
+        if (Seleccionada == this) Deseleccionar();
     }
 
     private IEnumerator Start()
     {
-        yield return null; // esperamos un frame a que se genere el tablero
-        celdaActual = tablero.ObtenerMapaCeldas()[coordenadaInicial];
-        transform.position = celdaActual.transform.position + Vector3.back;
+        if (tablero == null) tablero = FindObjectOfType<HexGridGenerator>();
+
+        while (tablero == null || tablero.ObtenerMapaCeldas().Count == 0)
+        {
+            yield return null;
+        }
+
+        Dictionary<Vector2Int, HexCelda> mapa = tablero.ObtenerMapaCeldas();
+
+        if (mapa.TryGetValue(coordenadaInicial, out celdaActual))
+        {
+            transform.position = celdaActual.transform.position + Vector3.back;
+        }
+        else
+        {
+            foreach (var kvp in mapa)
+            {
+                celdaActual = kvp.Value;
+                coordenadaInicial = kvp.Key;
+                break;
+            }
+            if (celdaActual != null) transform.position = celdaActual.transform.position + Vector3.back;
+        }
     }
 
-    // ---------- Utilidades estaticas ----------
+    // ---------- Gestión de Selección y Resaltado ----------
+
+    public static void SeleccionarUnidad(Unidad unidad)
+    {
+        LimpiarResaltadoRango();
+        Seleccionada = unidad;
+
+        if (unidad != null)
+        {
+            unidad.MostrarRangoMovimiento();
+        }
+    }
+
+    public static void Deseleccionar()
+    {
+        LimpiarResaltadoRango();
+        Seleccionada = null;
+    }
+
+    public void MostrarRangoMovimiento()
+    {
+        if (tablero == null) return;
+
+        casillasResaltadas = HexGridUtils.ObtenerCasillasEnRango(
+            celdaActual,
+            rangoMovimientoCasillas,
+            tablero.ObtenerMapaCeldas()
+        );
+
+        foreach (HexCelda celda in casillasResaltadas)
+        {
+            if (celda != celdaActual)
+            {
+                celda.EstablecerEnRango(true);
+            }
+        }
+    }
+
+    public static void LimpiarResaltadoRango()
+    {
+        foreach (HexCelda celda in casillasResaltadas)
+        {
+            if (celda != null)
+            {
+                celda.EstablecerEnRango(false);
+            }
+        }
+        casillasResaltadas.Clear();
+    }
+
+    // ---------- Utilidades Estáticas ----------
 
     public static Unidad EnCelda(HexCelda celda)
     {
@@ -60,8 +136,6 @@ public class Unidad : MonoBehaviour
         return false;
     }
 
-    // ---------- Turnos ----------
-
     public void NuevoTurno()
     {
         LimiteMovimiento limite = GetComponent<LimiteMovimiento>();
@@ -75,30 +149,36 @@ public class Unidad : MonoBehaviour
 
     // ---------- Movimiento ----------
 
-    // Lo usa el HUMANO al hacer clic en una casilla
     public void IrHacia(HexCelda destino)
     {
         if (enMovimiento) return;
-        if (TurnManager.Instancia != null && TurnManager.Instancia.TurnoDeIA) return; // el humano no mueve en turno de la IA
+        if (TurnManager.Instancia != null && TurnManager.Instancia.TurnoDeIA) return;
         if (!EsMiTurno()) return;
         if (destino == celdaActual) return;
         if (EnCelda(destino) != null) return;
 
+        HashSet<HexCelda> casillasValidas = HexGridUtils.ObtenerCasillasEnRango(
+            celdaActual,
+            rangoMovimientoCasillas,
+            tablero.ObtenerMapaCeldas()
+        );
+
+        if (!casillasValidas.Contains(destino))
+        {
+            Debug.LogWarning($"[Unidad] La casilla ({destino.q}, {destino.r}) está fuera del rango.");
+            return;
+        }
+
         List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas());
+        if (camino == null || camino.Count < 2) return;
+
+        LimpiarResaltadoRango();
         MoverPorCamino(camino);
     }
 
-    // Lo usan el humano y la IA: gasta puntos y recorre el camino si le llegan los puntos
     public bool MoverPorCamino(List<HexCelda> camino)
     {
         if (enMovimiento || camino == null || camino.Count < 2) return false;
-
-        LimiteMovimiento limite = GetComponent<LimiteMovimiento>();
-        if (limite != null)
-        {
-            if (!limite.PuedeRecorrer(camino)) return false;
-            limite.Gastar(camino);
-        }
 
         StartCoroutine(RecorrerCamino(camino));
         return true;
@@ -118,6 +198,8 @@ public class Unidad : MonoBehaviour
             }
             celdaActual = celda;
         }
+
         enMovimiento = false;
+        Deseleccionar();
     }
 }

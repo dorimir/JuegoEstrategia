@@ -7,7 +7,7 @@ public class TurnManager : MonoBehaviour
     public static TurnManager Instancia { get; private set; }
 
     [SerializeField] private int numeroJugadores = 2;
-    [Tooltip("Indices de los jugadores controlados por la IA (0 = Jugador 1, 1 = Jugador 2...)")]
+    [Tooltip("Índices de los jugadores controlados por la IA (0 = Jugador 1, 1 = Jugador 2...)")]
     [SerializeField] private List<int> jugadoresIA = new List<int> { 1 };
 
     public int JugadorActual { get; private set; } = 0;
@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour
 
     public void FinalizarTurno()
     {
-        // No se puede pasar turno mientras una unidad se esta moviendo
+        // No se puede pasar turno mientras una unidad se está moviendo
         if (Unidad.HayAlguienMoviendose()) return;
 
         JugadorActual = (JugadorActual + 1) % numeroJugadores;
@@ -47,7 +47,9 @@ public class TurnManager : MonoBehaviour
 
     private void IniciarTurno()
     {
-        Unidad.Seleccionada = null;
+        // Usamos Deseleccionar() para limpiar la unidad y apagar el resaltado de casillas
+        Unidad.Deseleccionar();
+
         if (SelectionManager.Instancia != null && SelectionManager.Instancia.celdaSeleccionada != null)
         {
             SelectionManager.Instancia.celdaSeleccionada.EstablecerSeleccionada(false);
