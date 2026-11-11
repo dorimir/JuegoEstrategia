@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7866509031621266463}
   - component: {fileID: 256313400264928926}
-  - component: {fileID: 4848412338211895767}
   - component: {fileID: 4165278145033965831}
   m_Layer: 0
   m_Name: Hexp
@@ -93,25 +92,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &4848412338211895767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4957472249999614825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292fc2dcbf217ea47adf03f5e423ca78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HexCelda
-  q: 0
-  r: 0
-  terreno: 0
-  recurso: 0
-  costeMovimiento: 1
-  bonusDefensa: 0
-  esEstructuraProduccion: 0
 --- !u!58 &4165278145033965831
 CircleCollider2D:
   m_ObjectHideFlags: 0

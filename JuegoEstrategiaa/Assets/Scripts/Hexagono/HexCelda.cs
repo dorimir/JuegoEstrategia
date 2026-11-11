@@ -7,7 +7,10 @@ public enum TipoTerreno
     Bosque,
     Montana,
     Agua,
-    Desierto
+    Desierto,
+    Cuartel,
+    Bandera,
+    BanderaCentral
 }
 
 public enum TipoRecurso
@@ -29,16 +32,24 @@ public class HexCelda : MonoBehaviour
     public TipoRecurso recurso = TipoRecurso.Ninguno;
     public int costeMovimiento = 1;
     public int bonusDefensa = 0;
+    public int puntosVictoria = 0;
     public bool esEstructuraProduccion = false;
 
     private SpriteRenderer spriteRenderer;
     private Color colorOriginal;
     private bool estaSeleccionada = false;
     private bool estaSobreVolando = false;
+    private bool estaEnRango = false;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnValidate()
+    {
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        ConfigurarCelda(q, r, terreno);
     }
 
     public void ConfigurarCelda(int q, int r, TipoTerreno terreno)
@@ -49,68 +60,84 @@ public class HexCelda : MonoBehaviour
 
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Asignacion de colores segun el terreno
         switch (terreno)
         {
             case TipoTerreno.Bosque:
                 costeMovimiento = 2;
-                bonusDefensa = 2;
-                colorOriginal = new Color(0.2f, 0.7f, 0.2f); // Verde bosque
+                bonusDefensa = 1;
+                colorOriginal = new Color(0.2f, 0.7f, 0.2f);
                 break;
             case TipoTerreno.Montana:
                 costeMovimiento = 3;
-                bonusDefensa = 4;
-                colorOriginal = new Color(0.5f, 0.5f, 0.5f); // Gris montana
+                bonusDefensa = 1;
+                colorOriginal = new Color(0.5f, 0.5f, 0.5f);
                 break;
             case TipoTerreno.Agua:
                 costeMovimiento = 999;
                 bonusDefensa = 0;
-                colorOriginal = new Color(0.2f, 0.4f, 0.8f); // Azul agua
+                colorOriginal = new Color(0.2f, 0.4f, 0.8f);
                 break;
-            default: // Llanura
+            case TipoTerreno.Cuartel:
+                costeMovimiento = 1;
+                bonusDefensa = 1;
+                colorOriginal = new Color(0.0f, 0.0f, 0.0f);
+                break;
+            case TipoTerreno.Bandera:
+                costeMovimiento = 0;
+                bonusDefensa = 2;
+                puntosVictoria = 1;
+                colorOriginal = new Color(1.0f, 0.0f, 0.0f);
+                break;
+            case TipoTerreno.BanderaCentral:
+                costeMovimiento = 0;
+                bonusDefensa = 4;
+                puntosVictoria = 2;
+                colorOriginal = new Color(1.0f, 0.0f, 0.2f);
+                break;
+            default: // Llanura / Desierto
                 costeMovimiento = 1;
                 bonusDefensa = 0;
-                colorOriginal = new Color(0.8f, 0.8f, 0.4f); // Amarillo/Tierra
+                colorOriginal = new Color(0.8f, 0.8f, 0.4f);
                 break;
         }
 
-        spriteRenderer.color = colorOriginal;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = colorOriginal;
+        }
     }
 
-    // Detecta cuando el raton ENTRA sobre la casilla
     private void OnMouseEnter()
     {
         estaSobreVolando = true;
         ActualizarVisualizacion();
     }
 
-    // Detecta cuando el raton SALE de la casilla
     private void OnMouseExit()
     {
         estaSobreVolando = false;
         ActualizarVisualizacion();
     }
 
-    // Detecta el clic del raton sobre la casilla
     private void OnMouseDown()
     {
-        // Durante el turno de la IA el jugador no puede hacer nada
         if (TurnManager.Instancia != null && TurnManager.Instancia.TurnoDeIA) return;
 
-        SelectionManager.Instancia.SeleccionarCelda(this);
+        if (SelectionManager.Instancia != null)
+        {
+            SelectionManager.Instancia.SeleccionarCelda(this);
+        }
 
-        // Si hay una unidad del jugador actual en esta casilla, la seleccionamos
         Unidad unidadAqui = Unidad.EnCelda(this);
         if (unidadAqui != null)
         {
             if (TurnManager.Instancia == null || unidadAqui.jugadorId == TurnManager.Instancia.JugadorActual)
             {
-                Unidad.Seleccionada = unidadAqui;
+                Unidad.SeleccionarUnidad(unidadAqui);
             }
             return;
         }
 
-        // Si no, movemos la unidad seleccionada hasta aqui (A*)
         if (Unidad.Seleccionada != null)
         {
             Unidad.Seleccionada.IrHacia(this);
@@ -123,24 +150,34 @@ public class HexCelda : MonoBehaviour
         ActualizarVisualizacion();
     }
 
+    public void EstablecerEnRango(bool enRango)
+    {
+        estaEnRango = enRango;
+        ActualizarVisualizacion();
+    }
+
     /// <summary>
-    /// Gestiona la prioridad visual: Seleccion > Hover > Color Original
+    /// Prioridad visual: Selección > Hover > En Rango > Normal
     /// </summary>
     private void ActualizarVisualizacion()
     {
+        if (spriteRenderer == null) return;
+
         if (estaSeleccionada)
         {
-            // Color de seleccion: Blanco brillante
             spriteRenderer.color = Color.white;
         }
         else if (estaSobreVolando)
         {
-            // Color de Hover: un tono mas claro/brillante que el original
             spriteRenderer.color = colorOriginal * 1.35f;
+        }
+        else if (estaEnRango)
+        {
+            // Color para casillas alcanzables (tinte cian/brillante)
+            spriteRenderer.color = Color.Lerp(colorOriginal, Color.cyan, 0.5f);
         }
         else
         {
-            // Estado normal: Color del terreno
             spriteRenderer.color = colorOriginal;
         }
     }
