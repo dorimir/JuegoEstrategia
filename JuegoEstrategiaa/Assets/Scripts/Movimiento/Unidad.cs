@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Unidad : MonoBehaviour
 {
+    //Todas las unidades
     public static List<Unidad> Todas = new List<Unidad>();
+
+    //unidad seleccionada actualmente
     public static Unidad Seleccionada { get; private set; }
 
     private static HashSet<HexCelda> casillasResaltadas = new HashSet<HexCelda>();
@@ -12,14 +15,8 @@ public class Unidad : MonoBehaviour
     [Header("Propietario")]
     public int jugadorId = 0;
 
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     [SerializeField] private HexGridGenerator tablero;
-    [SerializeField] private float velocidad = 3f;
-    [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero;
-
-    [Header("Límite de Desplazamiento")]
-    [Tooltip("Número de casillas/pasos máximos que puede recorrer por turno")]
-    public int rangoMovimientoCasillas = 2;
 
     private HexCelda celdaActual;
     private bool enMovimiento;
@@ -27,6 +24,34 @@ public class Unidad : MonoBehaviour
     public HexCelda CeldaActual => celdaActual;
     public bool EnMovimiento => enMovimiento;
     public HexGridGenerator Tablero => tablero;
+
+    [SerializeField] private float velocidad = 3f;
+
+    //esto deberia ser solo para las tropas iniciales, las demÃ¡s deberÃ­an parecer en un cuartel
+    [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero; 
+
+    [Header("Lï¿½mite de Desplazamiento")]
+    [Tooltip("Nï¿½mero de casillas/pasos mï¿½ximos que puede recorrer por turno")]
+    [SerializeField] private int rangoMovimientoCasillas = 1; //es dos por alguna razÃ³n en concreto o se puede cambiar? Puede ser privado?
+
+    [Header("Puntos de Ataque")]
+    [SerializeField] private int puntosAtaque = 1;
+
+    [Header("Puntos de Defensa")]
+    [SerializeField] private int puntosDefensa = 1;
+
+    private enum TipoAtaque : int
+    {
+        Rectas = 1,
+        Diagonales = 2,
+        Largo = 3
+    }
+
+    [Header("Alcance de Ataque")]
+    [SerializeField] private int alcanceAtaque = 1;
+    [Header("Tipo de Ataque")]
+    [SerializeField] private TipoAtaque tipoAtaque = TipoAtaque.Rectas;
+
 
     private void Awake()
     {
@@ -48,25 +73,30 @@ public class Unidad : MonoBehaviour
             yield return null;
         }
 
+//construimos un diccionario llamado mapa
         Dictionary<Vector2Int, HexCelda> mapa = tablero.ObtenerMapaCeldas();
 
+//obtenemos la celda correspondiente a la coordenada inicial y nos colocamos en ella
         if (mapa.TryGetValue(coordenadaInicial, out celdaActual))
         {
             transform.position = celdaActual.transform.position + Vector3.back;
         }
+//?? esto nos pone siempre en la primera celda, por que se hace esto?
         else
         {
+            //possible bucle infinito?
             foreach (var kvp in mapa)
             {
                 celdaActual = kvp.Value;
                 coordenadaInicial = kvp.Key;
                 break;
             }
+            //si tenemos una celda actual, nos colocamos en ella
             if (celdaActual != null) transform.position = celdaActual.transform.position + Vector3.back;
         }
     }
 
-    // ---------- Gestión de Selección y Resaltado ----------
+    // ---------- Gestiï¿½n de Selecciï¿½n y Resaltado ----------
 
     public static void SeleccionarUnidad(Unidad unidad)
     {
@@ -104,6 +134,52 @@ public class Unidad : MonoBehaviour
         }
     }
 
+        public void MostrarRangoAtaque()
+    {
+        if (tablero == null) return;
+
+        switch (tipoAtaque)
+        {
+            case TipoAtaque.Rectas:
+                casillasResaltadas = HexGridUtils.FourObtenerCasillasEnRango
+                (
+                celdaActual,
+                alcanceAtaque,
+                tablero.ObtenerMapaCeldas()
+                );
+
+                foreach (HexCelda celda in casillasResaltadas)
+                {
+                    if (celda != celdaActual)
+                    {
+                        celda.EstablecerEnRango(true);
+                    }
+                }
+                break;
+
+            case TipoAtaque.Diagonales:
+                   casillasResaltadas = HexGridUtils.DiagonalObtenerCasillasEnRango
+                (
+                celdaActual,
+                alcanceAtaque,
+                tablero.ObtenerMapaCeldas()
+                );
+
+                foreach (HexCelda celda in casillasResaltadas)
+                {
+                    if (celda != celdaActual)
+                    {
+                        celda.EstablecerEnRango(true);
+                    }
+                }
+                break;
+
+            case TipoAtaque.Largo:
+                Debug.Log("Alcance largo");
+                break;
+        }
+    }
+
     public static void LimpiarResaltadoRango()
     {
         foreach (HexCelda celda in casillasResaltadas)
@@ -116,7 +192,7 @@ public class Unidad : MonoBehaviour
         casillasResaltadas.Clear();
     }
 
-    // ---------- Utilidades Estáticas ----------
+    // ---------- Utilidades Estï¿½ticas ----------
 
     public static Unidad EnCelda(HexCelda celda)
     {
@@ -165,7 +241,7 @@ public class Unidad : MonoBehaviour
 
         if (!casillasValidas.Contains(destino))
         {
-            Debug.LogWarning($"[Unidad] La casilla ({destino.q}, {destino.r}) está fuera del rango.");
+            Debug.LogWarning($"[Unidad] La casilla ({destino.q}, {destino.r}) estï¿½ fuera del rango.");
             return;
         }
 
