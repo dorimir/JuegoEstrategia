@@ -22,24 +22,24 @@ public class Unidad : MonoBehaviour
     public int rangoMovimientoCasillas = 2;
 
     private HexCelda celdaActual;
-    private bool enMovimiento;
+    protected bool enMovimiento;
 
     public HexCelda CeldaActual => celdaActual;
     public bool EnMovimiento => enMovimiento;
     public HexGridGenerator Tablero => tablero;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Todas.Add(this);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         Todas.Remove(this);
         if (Seleccionada == this) Deseleccionar();
     }
 
-    private IEnumerator Start()
+    protected IEnumerator Start()
     {
         if (tablero == null) tablero = FindObjectOfType<HexGridGenerator>();
 
@@ -142,7 +142,7 @@ public class Unidad : MonoBehaviour
         if (limite != null) limite.Reiniciar();
     }
 
-    private bool EsMiTurno()
+    protected bool EsMiTurno()
     {
         return TurnManager.Instancia == null || TurnManager.Instancia.JugadorActual == jugadorId;
     }
@@ -184,7 +184,7 @@ public class Unidad : MonoBehaviour
         return true;
     }
 
-    private IEnumerator RecorrerCamino(List<HexCelda> camino)
+    protected IEnumerator RecorrerCamino(List<HexCelda> camino)
     {
         enMovimiento = true;
 
