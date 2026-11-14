@@ -13,7 +13,7 @@ public class Unidad : MonoBehaviour
     public int jugadorId = 0;
 
     [Header("Configuración")]
-    [SerializeField] private HexGridGenerator tablero;
+    [SerializeField] protected HexGridGenerator tablero;
     [SerializeField] private float velocidad = 3f;
     [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero;
 
@@ -21,7 +21,7 @@ public class Unidad : MonoBehaviour
     [Tooltip("Número de casillas/pasos máximos que puede recorrer por turno")]
     public int rangoMovimientoCasillas = 2;
 
-    private HexCelda celdaActual;
+    protected HexCelda celdaActual;
     protected bool enMovimiento;
 
     public HexCelda CeldaActual => celdaActual;
