@@ -30,9 +30,18 @@ public class Unidad : MonoBehaviour
     //esto deberia ser solo para las tropas iniciales, las demás deberían parecer en un cuartel
     [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero; 
 
-    [Header("L�mite de Desplazamiento")]
+    [Header("Terreno favorito)")]
+    [SerializeField] private TipoTerreno terrenoFavorito = TipoTerreno.Llanura;
+
+    [Header("Terreno penalizado")]
+    [SerializeField] private TipoTerreno terrenoPenalizado = TipoTerreno.Montana;
+
+    [Header("Coste de la unidad")]
+    [SerializeField] private int coste = 0;
+
+    [Header("LLmite de Desplazamiento")]
     [Tooltip("N�mero de casillas/pasos m�ximos que puede recorrer por turno")]
-    [SerializeField] private int rangoMovimientoCasillas = 1; //es dos por alguna razón en concreto o se puede cambiar? Puede ser privado?
+    [SerializeField] private int rangoMovimientoCasillas = 1;
 
     [Header("Puntos de Ataque")]
     [SerializeField] private int puntosAtaque = 1;
@@ -40,7 +49,7 @@ public class Unidad : MonoBehaviour
     [Header("Puntos de Defensa")]
     [SerializeField] private int puntosDefensa = 1;
 
-    private enum TipoAtaque : int
+    public enum TipoAtaque : int
     {
         Rectas = 1,
         Diagonales = 2,
@@ -52,6 +61,8 @@ public class Unidad : MonoBehaviour
     [Header("Tipo de Ataque")]
     [SerializeField] private TipoAtaque tipoAtaque = TipoAtaque.Rectas;
 
+
+//------------------FUNCIONES ------------------------------
 
     private void Awake()
     {
@@ -134,49 +145,19 @@ public class Unidad : MonoBehaviour
         }
     }
 
-        public void MostrarRangoAtaque()
+    public void MostrarRangoAtaque()
     {
         if (tablero == null) return;
-
-        switch (tipoAtaque)
+        else
         {
-            case TipoAtaque.Rectas:
-                casillasResaltadas = HexGridUtils.FourObtenerCasillasEnRango
-                (
+            casillasResaltadas = HexGridUtils.ObtenerCasillasEnRango
+            (
                 celdaActual,
                 alcanceAtaque,
-                tablero.ObtenerMapaCeldas()
-                );
-
-                foreach (HexCelda celda in casillasResaltadas)
-                {
-                    if (celda != celdaActual)
-                    {
-                        celda.EstablecerEnRango(true);
-                    }
-                }
-                break;
-
-            case TipoAtaque.Diagonales:
-                   casillasResaltadas = HexGridUtils.DiagonalObtenerCasillasEnRango
-                (
-                celdaActual,
-                alcanceAtaque,
-                tablero.ObtenerMapaCeldas()
-                );
-
-                foreach (HexCelda celda in casillasResaltadas)
-                {
-                    if (celda != celdaActual)
-                    {
-                        celda.EstablecerEnRango(true);
-                    }
-                }
-                break;
-
-            case TipoAtaque.Largo:
-                Debug.Log("Alcance largo");
-                break;
+                tablero.ObtenerMapaCeldas(),
+                true,
+                tipoAtaque
+            );
         }
     }
 

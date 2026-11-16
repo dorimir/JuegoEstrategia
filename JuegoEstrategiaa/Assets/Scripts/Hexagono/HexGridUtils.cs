@@ -27,61 +27,49 @@ public static class HexGridUtils
     /// <summary>
     /// Obtiene las celdas adyacentes v�lidas a partir de una coordenada.
     /// </summary>
-    public static List<HexCelda> ObtenerVecinos(Vector2Int coord, Dictionary<Vector2Int, HexCelda> mapa)
+    public static List<HexCelda> ObtenerVecinos(Vector2Int coord, Dictionary<Vector2Int, HexCelda> mapa, bool attacking = false, Unidad.TipoAtaque? tipoAtaque = null)
     {
         List<HexCelda> vecinos = new List<HexCelda>();
-
-        foreach (var dir in DireccionesHex)
+        Vector2Int[] Directions = null;
+        
+        if(!attacking)
         {
-            Vector2Int claveVecino = coord + dir;
-            if (mapa.TryGetValue(claveVecino, out HexCelda celdaEncontrada))
+            Directions = DireccionesHex;
+        }
+        else
+        {
+              // Use the value on the left if it is not null; otherwise use the value on the right.
+
+             Unidad.TipoAtaque switchValue = tipoAtaque ?? Unidad.TipoAtaque.Largo; // Default to Largo if null
+
+            switch (switchValue)
             {
-                vecinos.Add(celdaEncontrada);
+                case Unidad.TipoAtaque.Rectas:
+                    Directions = FourDireccionesHex;
+                    break;
+
+                case Unidad.TipoAtaque.Diagonales:
+                    Directions = DiagonalesDireccionesHex;
+                    break;
+
+                case Unidad.TipoAtaque.Largo:
+                    Directions = DireccionesHex;
+                    break;
             }
         }
-
-        return vecinos;
-    }
-
-     /// <summary>
-    /// Obtiene las celdas adyacentes v�lidas a partir de una coordenada. EN LAS 4 DIRECCIONES (N, S, E, O)
-    /// </summary>
-    public static List<HexCelda> FourDirectionsObtenerVecinos(Vector2Int coord, Dictionary<Vector2Int, HexCelda> mapa)
-    {
-        List<HexCelda> Fourvecinos = new List<HexCelda>();
-
-        foreach (var dir in FourDireccionesHex)
-        {
-            Vector2Int claveFourVecino = coord + dir;
-            if (mapa.TryGetValue(claveFourVecino, out HexCelda celdaFourEncontrada))
+        foreach (var dir in Directions)
             {
-                Fourvecinos.Add(celdaFourEncontrada);
+                Vector2Int claveVecino = coord + dir;
+                if (mapa.TryGetValue(claveVecino, out HexCelda celdaEncontrada))
+                {
+                    vecinos.Add(celdaEncontrada);
+                }
             }
-        }
 
-        return Fourvecinos;
+            return vecinos;
     }
 
-         /// <summary>
-    /// Obtiene las celdas adyacentes v�lidas a partir de una coordenada. EN LAS DIAGONALES
-    /// </summary>
-    public static List<HexCelda> DiagonalesObtenerVecinos(Vector2Int coord, Dictionary<Vector2Int, HexCelda> mapa)
-    {
-        List<HexCelda> Diagonalesvecinos = new List<HexCelda>();
-
-        foreach (var dir in DiagonalesDireccionesHex)
-        {
-            Vector2Int claveDiagonalesVecino = coord + dir;
-            if (mapa.TryGetValue(claveDiagonalesVecino, out HexCelda celdaDiagonalesEncontrada))
-            {
-                Diagonalesvecinos.Add(celdaDiagonalesEncontrada);
-            }
-        }
-
-        return Diagonalesvecinos;
-    }
-
-    public static HashSet<HexCelda> ObtenerCasillasEnRango(HexCelda origen, int rangoPasos, Dictionary<Vector2Int, HexCelda> mapa)
+    public static HashSet<HexCelda> ObtenerCasillasEnRango(HexCelda origen, int rangoPasos, Dictionary<Vector2Int, HexCelda> mapa, bool attacking = false, Unidad.TipoAtaque? tipoAtaque = null)
     {
         HashSet<HexCelda> alcanzables = new HashSet<HexCelda>();
         Dictionary<HexCelda, int> distancias = new Dictionary<HexCelda, int>();
@@ -99,7 +87,7 @@ public static class HexGridUtils
             // Si ya alcanzamos el l�mite de pasos, no seguimos expandiendo desde este nodo
             if (pasosActuales >= rangoPasos) continue;
 
-            foreach (HexCelda vecino in ObtenerVecinos(new Vector2Int(actual.q, actual.r), mapa))
+            foreach (HexCelda vecino in ObtenerVecinos(new Vector2Int(actual.q, actual.r), mapa, attacking, tipoAtaque)) //default to false if null
             {
                 // Infranqueable (Agua)
                 if (vecino.costeMovimiento >= 999) continue;
@@ -118,83 +106,6 @@ public static class HexGridUtils
 
         return alcanzables;
     }
-
-    public static HashSet<HexCelda> FourObtenerCasillasEnRango(HexCelda origen, int rangoPasos, Dictionary<Vector2Int, HexCelda> mapa)
-    {
-        HashSet<HexCelda> alcanzables = new HashSet<HexCelda>();
-        Dictionary<HexCelda, int> distancias = new Dictionary<HexCelda, int>();
-        Queue<HexCelda> frontera = new Queue<HexCelda>();
-
-        frontera.Enqueue(origen);
-        distancias[origen] = 0;
-        alcanzables.Add(origen);
-
-        while (frontera.Count > 0)
-        {
-            HexCelda actual = frontera.Dequeue();
-            int pasosActuales = distancias[actual];
-
-            // Si ya alcanzamos el l�mite de pasos, no seguimos expandiendo desde este nodo
-            if (pasosActuales >= rangoPasos) continue;
-
-            foreach (HexCelda vecino in FourDirectionsObtenerVecinos(new Vector2Int(actual.q, actual.r), mapa))
-            {
-                // Infranqueable (Agua)
-                if (vecino.costeMovimiento >= 999) continue;
-
-                int nuevaDistancia = pasosActuales + 1;
-
-                // Si no ha sido visitada o encontramos un camino con menos pasos
-                if (!distancias.ContainsKey(vecino) || nuevaDistancia < distancias[vecino])
-                {
-                    distancias[vecino] = nuevaDistancia;
-                    alcanzables.Add(vecino);
-                    frontera.Enqueue(vecino);
-                }
-            }
-        }
-
-        return alcanzables;
-    }
-
-      public static HashSet<HexCelda> DiagonalObtenerCasillasEnRango(HexCelda origen, int rangoPasos, Dictionary<Vector2Int, HexCelda> mapa)
-    {
-        HashSet<HexCelda> alcanzables = new HashSet<HexCelda>();
-        Dictionary<HexCelda, int> distancias = new Dictionary<HexCelda, int>();
-        Queue<HexCelda> frontera = new Queue<HexCelda>();
-
-        frontera.Enqueue(origen);
-        distancias[origen] = 0;
-        alcanzables.Add(origen);
-
-        while (frontera.Count > 0)
-        {
-            HexCelda actual = frontera.Dequeue();
-            int pasosActuales = distancias[actual];
-
-            // Si ya alcanzamos el l�mite de pasos, no seguimos expandiendo desde este nodo
-            if (pasosActuales >= rangoPasos) continue;
-
-            foreach (HexCelda vecino in DiagonalesObtenerVecinos(new Vector2Int(actual.q, actual.r), mapa))
-            {
-                // Infranqueable (Agua)
-                if (vecino.costeMovimiento >= 999) continue;
-
-                int nuevaDistancia = pasosActuales + 1;
-
-                // Si no ha sido visitada o encontramos un camino con menos pasos
-                if (!distancias.ContainsKey(vecino) || nuevaDistancia < distancias[vecino])
-                {
-                    distancias[vecino] = nuevaDistancia;
-                    alcanzables.Add(vecino);
-                    frontera.Enqueue(vecino);
-                }
-            }
-        }
-
-        return alcanzables;
-    }
-
 
     /// <summary>
     /// Distancia matem�tica directa entre dos coordenadas axiales (en casillas)
