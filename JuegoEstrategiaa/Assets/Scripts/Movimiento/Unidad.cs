@@ -64,7 +64,7 @@ public class Unidad : MonoBehaviour
 
 //------------------FUNCIONES ------------------------------
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Todas.Add(this);
     }
