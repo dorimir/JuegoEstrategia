@@ -16,9 +16,15 @@ public class Unidad : MonoBehaviour
     public int jugadorId = 0;
 
     [Header("Configuraci�n")]
-    [SerializeField] private HexGridGenerator tablero;
+    [SerializeField] protected HexGridGenerator tablero;
+    [SerializeField] private float velocidad = 3f;
+    [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero;
 
-    private HexCelda celdaActual;
+    [Header("L�mite de Desplazamiento")]
+    [Tooltip("N�mero de casillas/pasos m�ximos que puede recorrer por turno")]
+    public int rangoMovimientoCasillas = 2;
+
+    protected HexCelda celdaActual;
     protected bool enMovimiento;
 
     public HexCelda CeldaActual => celdaActual;
@@ -193,7 +199,7 @@ public class Unidad : MonoBehaviour
         return false;
     }
 
-    public void NuevoTurno()
+    public virtual void NuevoTurno()
     {
         LimiteMovimiento limite = GetComponent<LimiteMovimiento>();
         if (limite != null) limite.Reiniciar();
