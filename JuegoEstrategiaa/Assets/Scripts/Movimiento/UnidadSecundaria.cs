@@ -107,4 +107,27 @@ public class UnidadSecundaria : Unidad
         Gizmos.DrawWireSphere(transform.position, radioDeOido);
     }
 
+    public void ResetearDefensaExtra()
+    {
+        defensaExtraTurno = 0;
+        unidadEnAlerta = null;
+    }
+
+    public static void ResetearDefensaDeTodosLosRenos()
+    {
+        foreach (Unidad unidad in Todas)
+        {
+            if (unidad is UnidadSecundaria reno)
+            {
+                reno.ResetearDefensaExtra();
+            }
+        }
+        Debug.Log("Defensa temporal de los renos reseteada para el nuevo turno.");
+    }
+    public override void NuevoTurno()
+    {
+        base.NuevoTurno();
+        ResetearDefensaExtra();
+    }
+
     }

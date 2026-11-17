@@ -136,7 +136,7 @@ public class Unidad : MonoBehaviour
         return false;
     }
 
-    public void NuevoTurno()
+    public virtual void NuevoTurno()
     {
         LimiteMovimiento limite = GetComponent<LimiteMovimiento>();
         if (limite != null) limite.Reiniciar();
