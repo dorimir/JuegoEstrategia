@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class HexGridGenerator : MonoBehaviour
 {
-    [Header("Configuración del Tablero 2D")]
+    [Header("Configuración del Tablero 2D (Estilo Catan)")]
+    [Tooltip("Radio del mapa. Radio 2 = 19 casillas en forma de hexágono concéntrico.")]
     [Range(1, 10)]
     public int radioMapa = 2;
+
+    [Tooltip("Distancia desde el centro del hexágono a uno de sus vértices")]
     public float tamanoHexagono = 1.0f;
+
+    [Tooltip("Prefab 2D del Hexágono (debe tener SpriteRenderer y HexCelda)")]
     public GameObject hexPrefab;
 
     [Header("Opciones de Generación")]
@@ -14,35 +19,20 @@ public class HexGridGenerator : MonoBehaviour
 
     private Dictionary<Vector2Int, HexCelda> mapaCeldas = new Dictionary<Vector2Int, HexCelda>();
 
-    private void Awake()
+    private void Start()
     {
-        // 1. Reconstruir el diccionario con las casillas que ya estén en la escena
-        ReconstruirDiccionarioExistente();
-
-        // 2. Solo genera un mapa aleatorio si la escena está completamente vacía
-        if (autoGenerarAlIniciar && mapaCeldas.Count == 0)
+        if (autoGenerarAlIniciar)
         {
             GenerarTablero();
         }
     }
 
-    [ContextMenu("Generar Tablero Nuevamente")]
+    [ContextMenu("Generar Tablero 2D")]
     public void GenerarTablero()
     {
-        // Guardar los terrenos editados a mano en la escena antes de regenerar
-        Dictionary<Vector2Int, TipoTerreno> terrenosPrevios = new Dictionary<Vector2Int, TipoTerreno>();
-        foreach (Transform child in transform)
-        {
-            HexCelda celda = child.GetComponent<HexCelda>();
-            if (celda != null)
-            {
-                terrenosPrevios[new Vector2Int(celda.q, celda.r)] = celda.terreno;
-            }
-        }
-
-        // Limpiar exhaustivamente para evitar mapas superpuestos
         LimpiarTablero();
 
+        // Generación concéntrica tipo Catan
         for (int q = -radioMapa; q <= radioMapa; q++)
         {
             int r1 = Mathf.Max(-radioMapa, -q - radioMapa);
@@ -50,18 +40,14 @@ public class HexGridGenerator : MonoBehaviour
 
             for (int r = r1; r <= r2; r++)
             {
-                Vector2Int coord = new Vector2Int(q, r);
-                TipoTerreno terrenoAsignado = terrenosPrevios.ContainsKey(coord)
-                    ? terrenosPrevios[coord]
-                    : (TipoTerreno)Random.Range(0, 4);
-
-                CrearHexagono2D(q, r, terrenoAsignado);
+                CrearHexagono2D(q, r);
             }
         }
     }
 
-    private void CrearHexagono2D(int q, int r, TipoTerreno terreno)
+    private void CrearHexagono2D(int q, int r)
     {
+        // Conversión a coordenadas de mundo 2D (X, Y) para orientación Pointy-topped
         float xPos = tamanoHexagono * (Mathf.Sqrt(3f) * q + Mathf.Sqrt(3f) / 2f * r);
         float yPos = tamanoHexagono * (3f / 2f * r);
         Vector3 posicionMundo = transform.position + new Vector3(xPos, yPos, 0f);
@@ -75,50 +61,24 @@ public class HexGridGenerator : MonoBehaviour
             celda = nuevoObj.AddComponent<HexCelda>();
         }
 
-        celda.ConfigurarCelda(q, r, terreno);
-        mapaCeldas[new Vector2Int(q, r)] = celda;
+        // Asignación aleatoria de terreno y visualización básica
+        TipoTerreno terrenoAleatorio = (TipoTerreno)Random.Range(0, 4);
+        celda.ConfigurarCelda(q, r, terrenoAleatorio);
+
+        mapaCeldas.Add(new Vector2Int(q, r), celda);
     }
 
-    public void ReconstruirDiccionarioExistente()
-    {
-        mapaCeldas.Clear();
-        foreach (Transform child in transform)
-        {
-            HexCelda celda = child.GetComponent<HexCelda>();
-            if (celda != null)
-            {
-                mapaCeldas[new Vector2Int(celda.q, celda.r)] = celda;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Elimina de manera segura todos los objetos hijos en el Editor o en Play mode
-    /// para evitar duplicados o tableros superpuestos.
-    /// </summary>
     public void LimpiarTablero()
     {
-        for (int i = transform.childCount - 1; i >= 0; i--)
+        foreach (Transform child in transform)
         {
-            GameObject obj = transform.GetChild(i).gameObject;
-            if (Application.isPlaying)
-            {
-                Destroy(obj);
-            }
-            else
-            {
-                DestroyImmediate(obj);
-            }
+            DestroyImmediate(child.gameObject);
         }
         mapaCeldas.Clear();
     }
 
     public Dictionary<Vector2Int, HexCelda> ObtenerMapaCeldas()
     {
-        if (mapaCeldas.Count == 0)
-        {
-            ReconstruirDiccionarioExistente();
-        }
         return mapaCeldas;
     }
 }

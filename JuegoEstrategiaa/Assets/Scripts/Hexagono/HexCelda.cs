@@ -1,16 +1,13 @@
 using UnityEngine;
 
-// Tipos de terreno definidos en la especificacion
+// Tipos de terreno definidos en la especificaciï¿½n[cite: 1]
 public enum TipoTerreno
 {
     Llanura,
     Bosque,
     Montana,
     Agua,
-    Desierto,
-    Cuartel,
-    Bandera,
-    BanderaCentral
+    Desierto
 }
 
 public enum TipoRecurso
@@ -27,29 +24,21 @@ public class HexCelda : MonoBehaviour
     public int q;
     public int r;
 
-    [Header("Propiedades Tacticas")]
+    [Header("Propiedades Tï¿½cticas")]
     public TipoTerreno terreno;
     public TipoRecurso recurso = TipoRecurso.Ninguno;
     public int costeMovimiento = 1;
     public int bonusDefensa = 0;
-    public int puntosVictoria = 0;
     public bool esEstructuraProduccion = false;
 
     private SpriteRenderer spriteRenderer;
     private Color colorOriginal;
     private bool estaSeleccionada = false;
     private bool estaSobreVolando = false;
-    private bool estaEnRango = false;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void OnValidate()
-    {
-        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        ConfigurarCelda(q, r, terreno);
     }
 
     public void ConfigurarCelda(int q, int r, TipoTerreno terreno)
@@ -60,88 +49,59 @@ public class HexCelda : MonoBehaviour
 
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
 
+        // Asignaciï¿½n de colores segï¿½n el terreno[cite: 1]
         switch (terreno)
         {
             case TipoTerreno.Bosque:
                 costeMovimiento = 2;
-                bonusDefensa = 1;
-                colorOriginal = new Color(0.2f, 0.7f, 0.2f);
+                bonusDefensa = 2;
+                colorOriginal = new Color(0.2f, 0.7f, 0.2f); // Verde bosque
                 break;
             case TipoTerreno.Montana:
                 costeMovimiento = 3;
-                bonusDefensa = 1;
-                colorOriginal = new Color(0.5f, 0.5f, 0.5f);
+                bonusDefensa = 4;
+                colorOriginal = new Color(0.5f, 0.5f, 0.5f); // Gris montaï¿½a
                 break;
             case TipoTerreno.Agua:
                 costeMovimiento = 999;
                 bonusDefensa = 0;
-                colorOriginal = new Color(0.2f, 0.4f, 0.8f);
+                colorOriginal = new Color(0.2f, 0.4f, 0.8f); // Azul agua
                 break;
-            case TipoTerreno.Cuartel:
-                costeMovimiento = 1;
-                bonusDefensa = 1;
-                colorOriginal = new Color(0.0f, 0.0f, 0.0f);
-                break;
-            case TipoTerreno.Bandera:
-                costeMovimiento = 0;
-                bonusDefensa = 2;
-                puntosVictoria = 1;
-                colorOriginal = new Color(1.0f, 0.0f, 0.0f);
-                break;
-            case TipoTerreno.BanderaCentral:
-                costeMovimiento = 0;
-                bonusDefensa = 4;
-                puntosVictoria = 2;
-                colorOriginal = new Color(1.0f, 0.0f, 0.2f);
-                break;
-            default: // Llanura / Desierto
+            default: // Llanura
                 costeMovimiento = 1;
                 bonusDefensa = 0;
-                colorOriginal = new Color(0.8f, 0.8f, 0.4f);
+                colorOriginal = new Color(0.8f, 0.8f, 0.4f); // Amarillo/Tierra
                 break;
         }
 
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = colorOriginal;
-        }
+        spriteRenderer.color = colorOriginal;
     }
 
+    // Detecta cuando el ratï¿½n ENTRA sobre la casilla
     private void OnMouseEnter()
     {
         estaSobreVolando = true;
         ActualizarVisualizacion();
     }
 
+    // Detecta cuando el ratï¿½n SALE de la casilla
     private void OnMouseExit()
     {
         estaSobreVolando = false;
         ActualizarVisualizacion();
     }
 
+    // Detecta el clic del ratï¿½n sobre la casilla
     private void OnMouseDown()
     {
-        if (TurnManager.Instancia != null && TurnManager.Instancia.TurnoDeIA) return;
+        SelectionManager.Instancia.SeleccionarCelda(this);
 
-        if (SelectionManager.Instancia != null)
+        // Movimiento: la unidad va hasta esta casilla usando A*
+        if (Unidad.Instancia != null)
         {
-            SelectionManager.Instancia.SeleccionarCelda(this);
+            Unidad.Instancia.IrHacia(this);
         }
 
-        Unidad unidadAqui = Unidad.EnCelda(this);
-        if (unidadAqui != null)
-        {
-            if (TurnManager.Instancia == null || unidadAqui.jugadorId == TurnManager.Instancia.JugadorActual)
-            {
-                Unidad.SeleccionarUnidad(unidadAqui);
-            }
-            return;
-        }
-
-        if (Unidad.Seleccionada != null)
-        {
-            Unidad.Seleccionada.IrHacia(this);
-        }
     }
 
     public void EstablecerSeleccionada(bool seleccionada)
@@ -150,34 +110,24 @@ public class HexCelda : MonoBehaviour
         ActualizarVisualizacion();
     }
 
-    public void EstablecerEnRango(bool enRango)
-    {
-        estaEnRango = enRango;
-        ActualizarVisualizacion();
-    }
-
     /// <summary>
-    /// Prioridad visual: Selección > Hover > En Rango > Normal
+    /// Gestiona la prioridad visual: Selecciï¿½n > Hover > Color Original
     /// </summary>
     private void ActualizarVisualizacion()
     {
-        if (spriteRenderer == null) return;
-
         if (estaSeleccionada)
         {
+            // Color de selecciï¿½n: Blanco brillante
             spriteRenderer.color = Color.white;
         }
         else if (estaSobreVolando)
         {
+            // Color de Hover: Un todo mï¿½s claro/brillante que el original
             spriteRenderer.color = colorOriginal * 1.35f;
-        }
-        else if (estaEnRango)
-        {
-            // Color para casillas alcanzables (tinte cian/brillante)
-            spriteRenderer.color = Color.Lerp(colorOriginal, Color.cyan, 0.5f);
         }
         else
         {
+            // Estado normal: Color del terreno
             spriteRenderer.color = colorOriginal;
         }
     }
