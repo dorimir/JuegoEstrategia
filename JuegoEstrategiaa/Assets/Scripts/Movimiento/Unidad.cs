@@ -31,11 +31,6 @@ public class Unidad : MonoBehaviour
     public bool EnMovimiento => enMovimiento;
     public HexGridGenerator Tablero => tablero;
 
-    [SerializeField] private float velocidad = 3f;
-
-    //esto deberia ser solo para las tropas iniciales, las demás deberían parecer en un cuartel
-    [SerializeField] private Vector2Int coordenadaInicial = Vector2Int.zero; 
-
     [Header("Terreno favorito)")]
     [SerializeField] private TipoTerreno terrenoFavorito = TipoTerreno.Llanura;
 
@@ -45,9 +40,6 @@ public class Unidad : MonoBehaviour
     [Header("Coste de la unidad")]
     [SerializeField] private int coste = 0;
 
-    [Header("LLmite de Desplazamiento")]
-    [Tooltip("N�mero de casillas/pasos m�ximos que puede recorrer por turno")]
-    [SerializeField] private int rangoMovimientoCasillas = 1;
 
     [Header("Puntos de Ataque")]
     [SerializeField] private int puntosAtaque = 1;
