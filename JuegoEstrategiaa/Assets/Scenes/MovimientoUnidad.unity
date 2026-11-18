@@ -173,6 +173,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 1
+  influenciaTerreno: 5
 --- !u!58 &201317
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -322,6 +324,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &18164022
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -471,6 +475,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &34955544
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -620,6 +626,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &40378798
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -819,11 +827,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72458479e931d54c9da8eb8dcdb4dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnidadSecundaria
-  jugadorId: 0
+  jugadorId: 1
+  propietario: 1
   tablero: {fileID: 0}
   velocidad: 3
   coordenadaInicial: {x: 0, y: 0}
   rangoMovimientoCasillas: 4
+  terrenoFavorito: 0
+  terrenoPenalizado: 2
+  coste: 0
+  puntosAtaque: 1
+  puntosDefensa: 1
+  influenciaTropa: 10
+  alcanceAtaque: 1
+  tipoAtaque: 1
   radioDeOido: 4
   defensaBase: 10
 --- !u!1 &52189649
@@ -880,6 +897,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &52189652
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1029,6 +1048,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &71197253
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1178,6 +1199,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &84273015
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1327,6 +1350,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 0
+  influenciaTerreno: 5
 --- !u!58 &86425546
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1476,6 +1501,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &96383745
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1602,10 +1629,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unidad
   jugadorId: 0
+  propietario: 0
   tablero: {fileID: 796467498}
   velocidad: 3
   coordenadaInicial: {x: 0, y: 0}
   rangoMovimientoCasillas: 2
+  terrenoFavorito: 0
+  terrenoPenalizado: 2
+  coste: 0
+  puntosAtaque: 1
+  puntosDefensa: 1
+  influenciaTropa: 10
+  alcanceAtaque: 1
+  tipoAtaque: 1
 --- !u!212 &99877802
 SpriteRenderer:
   serializedVersion: 2
@@ -1734,6 +1770,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &111500793
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1883,6 +1921,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &159764315
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2032,6 +2072,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &164716169
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2181,6 +2223,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &164877441
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2330,6 +2374,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &169650099
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2479,6 +2525,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &183976223
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2628,6 +2676,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &193399133
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2777,6 +2827,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &199393255
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2926,6 +2978,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &204673375
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3075,6 +3129,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &211616219
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3224,6 +3280,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &215177621
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3373,6 +3431,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &246846711
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3522,6 +3582,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &253437571
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3671,6 +3733,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &254286104
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3820,6 +3884,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &261097257
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3969,6 +4035,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &263503993
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4118,6 +4186,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &283707815
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4267,6 +4337,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &307559281
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4416,6 +4488,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &309029863
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4565,6 +4639,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &324832909
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4714,6 +4790,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &350308920
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4863,6 +4941,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &362595056
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5012,6 +5092,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &362725664
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5161,6 +5243,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &378527816
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5310,6 +5394,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &379875081
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5459,6 +5545,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &383225285
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5608,6 +5696,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &415716802
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5757,6 +5847,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &440960995
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5906,6 +5998,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &453755956
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6055,6 +6149,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &467275367
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6204,6 +6300,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &483505206
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6353,6 +6451,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &496196126
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6502,6 +6602,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &518555311
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6651,6 +6753,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &521496931
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6800,6 +6904,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &541218040
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6949,6 +7055,8 @@ MonoBehaviour:
   bonusDefensa: 2
   puntosVictoria: 1
   esEstructuraProduccion: 0
+  propietario: 0
+  influenciaTerreno: 8
 --- !u!58 &545409031
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7098,6 +7206,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &591294828
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7247,6 +7357,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &596746780
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7396,6 +7508,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &624820034
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7545,6 +7659,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &633651632
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7694,6 +7810,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &641383889
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7843,6 +7961,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &651425334
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7992,6 +8112,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &674834809
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8141,6 +8263,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &719489127
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8290,6 +8414,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &750127347
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8439,6 +8565,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &750422567
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8588,6 +8716,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &761058011
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8737,6 +8867,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &777376515
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8886,6 +9018,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &791242835
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9252,6 +9386,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &800039725
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9401,6 +9537,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &824554602
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9550,6 +9688,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &832378696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9699,6 +9839,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &854204251
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9848,6 +9990,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &878155054
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9997,6 +10141,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &881155515
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10146,6 +10292,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &884473715
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10295,6 +10443,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &906734983
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10581,6 +10731,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &914489461
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10730,6 +10882,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &916749156
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10879,6 +11033,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &921871339
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11028,6 +11184,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &925872895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11177,6 +11335,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &940042801
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11326,6 +11486,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &951783871
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11475,6 +11637,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &965280834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11624,6 +11788,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &975176107
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11773,6 +11939,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &976676830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11922,6 +12090,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &977498893
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12071,6 +12241,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &987922767
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12220,6 +12392,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &998520091
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12369,6 +12543,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1009258935
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12518,6 +12694,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1021413988
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12667,6 +12845,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1030785016
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12816,6 +12996,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1036229594
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12965,6 +13147,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1040302966
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13114,6 +13298,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1054557463
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13263,6 +13449,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1058199204
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13459,6 +13647,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1062929116
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13608,6 +13798,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1072101610
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13757,6 +13949,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1098791128
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13906,6 +14100,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1103931098
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14055,6 +14251,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1132253279
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14204,6 +14402,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1150395249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14353,6 +14553,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1166234099
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14502,6 +14704,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1183420122
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14651,6 +14855,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1185221537
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14800,6 +15006,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1194690655
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14949,6 +15157,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1201003538
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15098,6 +15308,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1214514231
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15247,6 +15459,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1225419112
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15396,6 +15610,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1235223017
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15545,6 +15761,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1256027822
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15694,6 +15912,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1256271653
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15843,6 +16063,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1258084741
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15992,6 +16214,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1261602187
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16141,6 +16365,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1272864716
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16290,6 +16516,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1307192422
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16439,6 +16667,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1314434834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16588,6 +16818,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1316120801
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16737,6 +16969,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1325272703
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16886,6 +17120,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1329832533
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17035,6 +17271,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1351033738
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17184,6 +17422,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1393282327
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17333,6 +17573,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1397137008
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17482,6 +17724,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1411020420
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17631,6 +17875,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1424781873
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17780,6 +18026,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1429368735
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17929,6 +18177,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1438682649
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18078,6 +18328,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1470508201
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18227,6 +18479,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1510447019
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18332,6 +18586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525450079}
   - component: {fileID: 1525450078}
+  - component: {fileID: 1525450080}
   m_Layer: 0
   m_Name: SelectionManager
   m_TagString: Untagged
@@ -18367,6 +18622,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1525450080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525450077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06717e506cf42114f9eb1f8f8c1b4b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfluenceMapManager
+  tablero: {fileID: 0}
+  radioInfluencia: 3
+  capaVisualActiva: 0
+  teclaAlternarMapa: 109
 --- !u!1 &1530134070
 GameObject:
   m_ObjectHideFlags: 0
@@ -18421,6 +18692,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1530134073
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18570,6 +18843,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1569949554
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18719,6 +18994,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1588815285
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18868,6 +19145,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1594055013
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19017,6 +19296,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1600743145
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19166,6 +19447,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1644317917
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19315,6 +19598,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1656503780
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19464,6 +19749,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1662600506
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19613,6 +19900,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1667106236
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19762,6 +20051,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1667130309
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19911,6 +20202,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1671509719
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20060,6 +20353,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1677189448
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20209,6 +20504,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1684405052
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20358,6 +20655,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1691514297
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20507,6 +20806,8 @@ MonoBehaviour:
   bonusDefensa: 2
   puntosVictoria: 1
   esEstructuraProduccion: 0
+  propietario: 1
+  influenciaTerreno: 8
 --- !u!58 &1697486091
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20785,6 +21086,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1751717188
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20934,6 +21237,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1755580066
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21083,6 +21388,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1767449796
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21232,6 +21539,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1776602098
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21381,6 +21690,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1779792609
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21530,6 +21841,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1799089034
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21679,6 +21992,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1806141404
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21828,6 +22143,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1808745427
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21977,6 +22294,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1815244264
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22126,6 +22445,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1837277329
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22275,6 +22596,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1838125523
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22424,6 +22747,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1840604726
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22573,6 +22898,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1848397171
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22722,6 +23049,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1848725130
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22871,6 +23200,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1859862409
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23020,6 +23351,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1870162908
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23169,6 +23502,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1877083856
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23318,6 +23653,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1898934641
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23467,6 +23804,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1918892841
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23616,6 +23955,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1925265872
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23765,6 +24106,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1928302564
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23914,6 +24257,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1928939471
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24063,6 +24408,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1940380803
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24212,6 +24559,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1945450263
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24361,6 +24710,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1951380636
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24510,6 +24861,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1963646685
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24659,6 +25012,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1974005309
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24808,6 +25163,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1987866459
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24957,6 +25314,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2049696774
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25106,6 +25465,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2058200448
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25255,6 +25616,8 @@ MonoBehaviour:
   bonusDefensa: 4
   puntosVictoria: 2
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 10
 --- !u!58 &2071843414
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25404,6 +25767,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2083258763
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25553,6 +25918,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2086925088
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25702,6 +26069,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2088527377
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25851,6 +26220,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2124101398
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26000,6 +26371,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2136191220
 CircleCollider2D:
   m_ObjectHideFlags: 0

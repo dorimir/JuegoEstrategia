@@ -14,6 +14,7 @@ public class Unidad : MonoBehaviour
 
     [Header("Propietario")]
     public int jugadorId = 0;
+    public Propietario propietario = Propietario.Jugador;
 
     [Header("Configuraci�n")]
     [SerializeField] protected HexGridGenerator tablero;
@@ -47,6 +48,10 @@ public class Unidad : MonoBehaviour
     [Header("Puntos de Defensa")]
     [SerializeField] private int puntosDefensa = 1;
 
+    [Header("Influencia Táctica")]
+    [Tooltip("Peso de influencia que proyecta esta tropa en el mapa de influencia")]
+    public int influenciaTropa = 10;
+
     public enum TipoAtaque : int
     {
         Rectas = 1,
@@ -60,11 +65,12 @@ public class Unidad : MonoBehaviour
     [SerializeField] private TipoAtaque tipoAtaque = TipoAtaque.Rectas;
 
 
-//------------------FUNCIONES ------------------------------
+    //------------------FUNCIONES ------------------------------
 
     protected virtual void Awake()
     {
         Todas.Add(this);
+        propietario = (jugadorId == 0) ? Propietario.Jugador : Propietario.IA;
     }
 
     protected virtual void OnDestroy()
