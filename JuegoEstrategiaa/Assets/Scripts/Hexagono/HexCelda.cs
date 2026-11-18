@@ -21,6 +21,12 @@ public enum TipoRecurso
     Comida
 }
 
+public enum Propietario
+{
+    Jugador,
+    IA,
+    Nadie
+}
 public class HexCelda : MonoBehaviour
 {
     [Header("Coordenadas Axiales")]
@@ -40,6 +46,8 @@ public class HexCelda : MonoBehaviour
     private bool estaSeleccionada = false;
     private bool estaSobreVolando = false;
     private bool estaEnRango = false;
+
+    public Propietario propietario = Propietario.Nadie;
 
     private void Awake()
     {
