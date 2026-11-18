@@ -78,49 +78,57 @@ public class HexCelda : MonoBehaviour
                 costeMovimiento = 2;
                 bonusDefensa = 1;
                 influenciaTerreno = 0;
-                colorOriginal = new Color(0.2f, 0.7f, 0.2f);
+                colorOriginal = DesdeHex("#96A159");
                 break;
             case TipoTerreno.Montana:
                 costeMovimiento = 3;
                 bonusDefensa = 1;
                 influenciaTerreno = 0;
-                colorOriginal = new Color(0.5f, 0.5f, 0.5f);
+                colorOriginal = DesdeHex("#716C6E");
                 break;
             case TipoTerreno.Agua:
                 costeMovimiento = 999;
                 bonusDefensa = 0;
                 influenciaTerreno = 0;
-                colorOriginal = new Color(0.2f, 0.4f, 0.8f);
+                colorOriginal = DesdeHex("#5ABB99");
                 break;
             case TipoTerreno.Cuartel:
                 costeMovimiento = 1;
                 bonusDefensa = 1;
                 influenciaTerreno = 5;
-                colorOriginal = new Color(0.0f, 0.0f, 0.0f);
+                colorOriginal = DesdeHex("#F8EDCA");
                 break;
             case TipoTerreno.Bandera:
                 costeMovimiento = 0;
                 bonusDefensa = 2;
                 puntosVictoria = 1;
                 influenciaTerreno = 8;
-                colorOriginal = new Color(1.0f, 0.0f, 0.0f);
+                colorOriginal = DesdeHex("#F8EDCA");
                 break;
             case TipoTerreno.BanderaCentral:
                 costeMovimiento = 0;
                 bonusDefensa = 4;
                 puntosVictoria = 2;
                 influenciaTerreno = 10;
-                colorOriginal = new Color(1.0f, 0.0f, 0.2f);
+                colorOriginal = DesdeHex("#F8EDCA");
                 break;
             default: // Llanura / Desierto
                 costeMovimiento = 1;
                 bonusDefensa = 0;
                 influenciaTerreno = 0;
-                colorOriginal = new Color(0.8f, 0.8f, 0.4f);
+                colorOriginal = DesdeHex("#E6C378");
                 break;
         }
 
         ActualizarVisualizacion();
+    }
+
+    // Convierte un color escrito en hexadecimal ("#RRGGBB") en un Color de Unity
+    private static Color DesdeHex(string hex)
+    {
+        Color color;
+        ColorUtility.TryParseHtmlString(hex, out color);
+        return color;
     }
 
     private void OnMouseEnter()
@@ -186,7 +194,7 @@ public class HexCelda : MonoBehaviour
     }
 
     /// <summary>
-    /// Prioridad visual: Selección > Hover > En Rango > Mapa de Influencia > Normal
+    /// Prioridad visual: Selecciï¿½n > Hover > En Rango > Mapa de Influencia > Normal
     /// </summary>
     private void ActualizarVisualizacion()
     {

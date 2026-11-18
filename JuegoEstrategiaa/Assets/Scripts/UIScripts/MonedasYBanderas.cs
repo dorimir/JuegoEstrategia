@@ -7,6 +7,8 @@ using UnityEngine;
 // 2. Cada X segundos se cobran monedas por cada bandera conquistada.
 public class MonedasYBanderas : MonoBehaviour
 {
+    public static MonedasYBanderas Instancia;
+
     [SerializeField] private TextMeshProUGUI textoMonedas;
     [SerializeField] private TextMeshProUGUI textoBanderas;
     [SerializeField] private Sprite spriteBanderaAzul;
@@ -17,6 +19,13 @@ public class MonedasYBanderas : MonoBehaviour
     private List<HexCelda> banderasConquistadas = new List<HexCelda>();
     private int monedas = 0;
     private float temporizador = 0f;
+
+    public int Monedas => monedas;
+
+    private void Awake()
+    {
+        Instancia = this;
+    }
 
     private void Start()
     {
