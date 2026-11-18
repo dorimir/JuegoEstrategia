@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 201318}
   - component: {fileID: 201317}
   - component: {fileID: 201316}
+  - component: {fileID: 201319}
   m_Layer: 0
   m_Name: Hex (7, 0)
   m_TagString: Untagged
@@ -150,7 +151,8 @@ Transform:
   m_LocalPosition: {x: 6.3046646, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 255388815}
   m_Father: {fileID: 796467500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &201316
@@ -173,6 +175,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 1
+  influenciaTerreno: 5
 --- !u!58 &201317
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -268,6 +272,100 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &201319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b43b2e0c3c1ca249b28d5e3e785e641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cuartel
+  propietario: 1
+  dibujo: {fileID: 0}
+  spriteAliado: {fileID: 0}
+  spriteEnemigo: {fileID: 0}
+--- !u!1 &13414009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13414012}
+  - component: {fileID: 13414011}
+  - component: {fileID: 13414010}
+  m_Layer: 0
+  m_Name: PanelSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &13414010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13414009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.1, g: 0.1, b: 0.15, a: 0.9}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &13414011
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13414009}
+  m_CullTransparentMesh: 1
+--- !u!224 &13414012
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13414009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1624006177}
+  - {fileID: 882005250}
+  - {fileID: 86503057}
+  m_Father: {fileID: 1102879148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 30}
+  m_SizeDelta: {x: 620, y: 190}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &18164019
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +420,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &18164022
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -548,6 +648,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &34955544
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -697,6 +799,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &40378798
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -846,6 +950,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &52189652
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -995,6 +1101,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &71197253
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1145,6 +1253,8 @@ MonoBehaviour:
   bonusDefensa: 2
   puntosVictoria: 1
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 8
 --- !u!58 &84273015
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1252,6 +1362,7 @@ GameObject:
   - component: {fileID: 86425547}
   - component: {fileID: 86425546}
   - component: {fileID: 86425545}
+  - component: {fileID: 86425548}
   m_Layer: 0
   m_Name: Hex (-7, 0)
   m_TagString: Untagged
@@ -1271,7 +1382,8 @@ Transform:
   m_LocalPosition: {x: -6.3046646, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2049299393}
   m_Father: {fileID: 796467500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &86425545
@@ -1294,6 +1406,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 0
+  influenciaTerreno: 5
 --- !u!58 &86425546
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1389,6 +1503,171 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &86425548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86425543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b43b2e0c3c1ca249b28d5e3e785e641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cuartel
+  propietario: 0
+  dibujo: {fileID: 2049299394}
+  spriteAliado: {fileID: 0}
+  spriteEnemigo: {fileID: 0}
+--- !u!1 &86503056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 86503057}
+  - component: {fileID: 86503061}
+  - component: {fileID: 86503060}
+  - component: {fileID: 86503059}
+  - component: {fileID: 86503058}
+  m_Layer: 0
+  m_Name: BotonCancelar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &86503057
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86503056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1303586613}
+  m_Father: {fileID: 13414012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 145, y: 25}
+  m_SizeDelta: {x: 260, y: 80}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &86503058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86503056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbd6bca0a2c81449b3afc345a4a45ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotonRebote
+  escalaHover: 1.1
+  escalaClic: 0.9
+  duracion: 0.25
+--- !u!114 &86503059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86503056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 86503060}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1102879149}
+        m_TargetAssemblyTypeName: MenuSpawn, Assembly-CSharp
+        m_MethodName: Cerrar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &86503060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86503056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &86503061
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86503056}
+  m_CullTransparentMesh: 1
 --- !u!1 &96383742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,6 +1722,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &96383745
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1592,6 +1873,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &111500793
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1741,6 +2024,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &159764315
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1890,6 +2175,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &164716169
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2039,6 +2326,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &164877441
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2188,6 +2477,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &169650099
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2337,6 +2628,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &183976223
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2486,6 +2779,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &193399133
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2635,6 +2930,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &199393255
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2784,6 +3081,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &204673375
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2933,6 +3232,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &211616219
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3082,6 +3383,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &215177621
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3236,6 +3539,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &246846711
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3385,6 +3690,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &253437571
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3534,6 +3841,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &254286104
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3629,6 +3938,80 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &255388814
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 201315}
+    m_Modifications:
+    - target: {fileID: 3777033892559975859, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Name
+      value: SprieCuartel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Color.g
+      value: 0.69833064
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Color.r
+      value: 0.13679248
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+--- !u!4 &255388815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+  m_PrefabInstance: {fileID: 255388814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &261097254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,6 +4066,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &261097257
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3832,6 +4217,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &263503993
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4060,6 +4447,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &283707815
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4209,6 +4598,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &307559281
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4358,6 +4749,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &309029863
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4507,6 +4900,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &324832909
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4713,6 +5108,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &350308920
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4862,6 +5259,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &362595056
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5011,6 +5410,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &362725664
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5160,6 +5561,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &378527816
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5309,6 +5712,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &379875081
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5458,6 +5863,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &383225285
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5607,6 +6014,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &415716802
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5756,6 +6165,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &440960995
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5905,6 +6316,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &453755956
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6054,6 +6467,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &467275367
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6203,6 +6618,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &483505206
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6352,6 +6769,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &496196126
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6501,6 +6920,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &518555311
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6650,6 +7071,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &521496931
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6799,6 +7222,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &541218040
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6948,6 +7373,8 @@ MonoBehaviour:
   bonusDefensa: 2
   puntosVictoria: 1
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 8
 --- !u!58 &545409031
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7097,6 +7524,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &591294828
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7246,6 +7675,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &596746780
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7395,6 +7826,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &624820034
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7544,6 +7977,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &633651632
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7693,6 +8128,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &641383889
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7842,6 +8279,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &651425334
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7991,6 +8430,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &674834809
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8140,6 +8581,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &719489127
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8289,6 +8732,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &750127347
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8438,6 +8883,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &750422567
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8587,6 +9034,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &761058011
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8736,6 +9185,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &777376515
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8885,6 +9336,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &791242835
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9251,6 +9704,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &800039725
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9400,6 +9855,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &824554602
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9549,6 +10006,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &832378696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9675,7 +10134,8 @@ Transform:
   m_LocalPosition: {x: 4.5033317, y: -3.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 337814095415772835}
   m_Father: {fileID: 796467500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &854204250
@@ -9692,12 +10152,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HexCelda
   q: 7
   r: -4
-  terreno: 1
+  terreno: 5
   recurso: 0
-  costeMovimiento: 2
+  costeMovimiento: 1
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 1
+  influenciaTerreno: 5
 --- !u!58 &854204251
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9784,7 +10246,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
-  m_Color: {r: 0.2, g: 0.7, b: 0.2, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9847,6 +10309,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &878155054
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9996,6 +10460,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &881155515
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10091,6 +10557,155 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &882005249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882005250}
+  - component: {fileID: 882005254}
+  - component: {fileID: 882005253}
+  - component: {fileID: 882005252}
+  - component: {fileID: 882005251}
+  m_Layer: 0
+  m_Name: BotonTropa0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &882005250
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882005249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1372100136}
+  m_Father: {fileID: 13414012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -145, y: 25}
+  m_SizeDelta: {x: 260, y: 80}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &882005251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882005249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbd6bca0a2c81449b3afc345a4a45ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotonRebote
+  escalaHover: 1.1
+  escalaClic: 0.9
+  duracion: 0.25
+--- !u!114 &882005252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882005249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 882005253}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1102879149}
+        m_TargetAssemblyTypeName: MenuSpawn, Assembly-CSharp
+        m_MethodName: Spawnear
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &882005253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882005249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &882005254
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882005249}
+  m_CullTransparentMesh: 1
 --- !u!1 &882558938
 GameObject:
   m_ObjectHideFlags: 0
@@ -10222,6 +10837,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &884473715
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10371,6 +10988,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &906734983
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10657,6 +11276,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &914489461
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10806,6 +11427,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &916749156
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10955,6 +11578,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &921871339
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11104,6 +11729,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &925872895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11253,6 +11880,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &940042801
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11402,6 +12031,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &951783871
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11551,6 +12182,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &965280834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11700,6 +12333,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &975176107
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11849,6 +12484,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &976676830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11998,6 +12635,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &977498893
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12147,6 +12786,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &987922767
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12296,6 +12937,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &998520091
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12445,6 +13088,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1009258935
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12594,6 +13239,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1021413988
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12743,6 +13390,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1030785016
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12892,6 +13541,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1036229594
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13041,6 +13692,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1040302966
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13190,6 +13843,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1054557463
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13339,6 +13994,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1058199204
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13488,6 +14145,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1062929116
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13637,6 +14296,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1072101610
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13786,6 +14447,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1098791128
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13894,6 +14557,7 @@ GameObject:
   - component: {fileID: 1102879146}
   - component: {fileID: 1102879145}
   - component: {fileID: 1102879144}
+  - component: {fileID: 1102879149}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -13996,6 +14660,7 @@ RectTransform:
   m_Children:
   - {fileID: 882558939}
   - {fileID: 21826691}
+  - {fileID: 13414012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14003,6 +14668,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1102879149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102879143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc0883cadbc6667419017cc699400c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuSpawn
+  panel: {fileID: 13414009}
+  tropas:
+  - {fileID: 4580378205908410724, guid: 4ab1ac92acfd2156ab579462ebf57fd1, type: 3}
+  monedas: {fileID: 1102879144}
+  tablero: {fileID: 796467498}
 --- !u!1 &1103931095
 GameObject:
   m_ObjectHideFlags: 0
@@ -14057,6 +14739,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1103931098
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14211,6 +14895,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1132253279
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14435,6 +15121,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1150395249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14584,6 +15272,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1166234099
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14733,6 +15423,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1183420122
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14882,6 +15574,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1185221537
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15031,6 +15725,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1194690655
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15180,6 +15876,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1201003538
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15329,6 +16027,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1214514231
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15478,6 +16178,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1225419112
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15627,6 +16329,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1235223017
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15776,6 +16480,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1256027822
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15925,6 +16631,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1256271653
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16074,6 +16782,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1258084741
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16223,6 +16933,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1261602187
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16372,6 +17084,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1272864716
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16467,6 +17181,143 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1303586612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303586613}
+  - component: {fileID: 1303586615}
+  - component: {fileID: 1303586614}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1303586613
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303586612}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 86503057}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1303586614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303586612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Cancelar
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1303586615
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303586612}
+  m_CullTransparentMesh: 1
 --- !u!1 &1307192419
 GameObject:
   m_ObjectHideFlags: 0
@@ -16521,6 +17372,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1307192422
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16670,6 +17523,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1314434834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16819,6 +17674,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1316120801
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16968,6 +17825,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1325272703
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17117,6 +17976,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1329832533
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17266,6 +18127,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1351033738
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17361,6 +18224,143 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1372100135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372100136}
+  - component: {fileID: 1372100138}
+  - component: {fileID: 1372100137}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1372100136
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372100135}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 882005250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1372100137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372100135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Unidad (2)
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1372100138
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372100135}
+  m_CullTransparentMesh: 1
 --- !u!1 &1393282324
 GameObject:
   m_ObjectHideFlags: 0
@@ -17415,6 +18415,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1393282327
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17564,6 +18566,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1397137008
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17713,6 +18717,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1411020420
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17862,6 +18868,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1424781873
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18011,6 +19019,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1429368735
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18160,6 +19170,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1438682649
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18309,6 +19321,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1470508201
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18458,6 +19472,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1510447019
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18652,6 +19668,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1530134073
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18801,6 +19819,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1569949554
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18950,6 +19970,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1588815285
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19099,6 +20121,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1594055013
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19248,6 +20272,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1600743145
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19343,6 +20369,143 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1624006176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624006177}
+  - component: {fileID: 1624006179}
+  - component: {fileID: 1624006178}
+  m_Layer: 0
+  m_Name: Titulo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1624006177
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624006176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 13414012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: 580, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1624006178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624006176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Elige celda y tropa
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1624006179
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624006176}
+  m_CullTransparentMesh: 1
 --- !u!1 &1644317914
 GameObject:
   m_ObjectHideFlags: 0
@@ -19397,6 +20560,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1644317917
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19546,6 +20711,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1656503780
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19695,6 +20862,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1662600506
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19844,6 +21013,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1667106236
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19993,6 +21164,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1667130309
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20142,6 +21315,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1671509719
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20291,6 +21466,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1677189448
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20440,6 +21617,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1684405052
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20589,6 +21768,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1691514297
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20738,6 +21919,8 @@ MonoBehaviour:
   bonusDefensa: 2
   puntosVictoria: 1
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 8
 --- !u!58 &1697486091
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20887,6 +22070,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1751717188
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21036,6 +22221,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1755580066
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21185,6 +22372,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1767449796
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21334,6 +22523,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1776602098
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21483,6 +22674,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1779792609
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21632,6 +22825,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1799089034
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21781,6 +22976,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1806141404
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21930,6 +23127,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1808745427
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22079,6 +23278,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1815244264
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22229,6 +23430,8 @@ MonoBehaviour:
   bonusDefensa: 2
   puntosVictoria: 1
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 8
 --- !u!58 &1837277329
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22378,6 +23581,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1838125523
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22527,6 +23732,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1840604726
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22676,6 +23883,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1848397171
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22825,6 +24034,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1848725130
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22974,6 +24185,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1859862409
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23123,6 +24336,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1870162908
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23272,6 +24487,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1877083856
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23421,6 +24638,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1898934641
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23707,6 +24926,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1918892841
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23856,6 +25077,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1925265872
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24005,6 +25228,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1928302564
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24154,6 +25379,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1928939471
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24303,6 +25530,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1940380803
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24452,6 +25681,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1945450263
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24601,6 +25832,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1951380636
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24750,6 +25983,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1963646685
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -24899,6 +26134,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1974005309
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25048,6 +26285,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &1987866459
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25355,6 +26594,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020476156}
   m_CullTransparentMesh: 1
+--- !u!1001 &2049299392
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 86425544}
+    m_Modifications:
+    - target: {fileID: 3777033892559975859, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Name
+      value: SprieCuartel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+--- !u!4 &2049299393 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+  m_PrefabInstance: {fileID: 2049299392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &2049299394 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+  m_PrefabInstance: {fileID: 2049299392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2049696771
 GameObject:
   m_ObjectHideFlags: 0
@@ -25409,6 +26715,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2049696774
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25558,6 +26866,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2058200448
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25707,6 +27017,8 @@ MonoBehaviour:
   bonusDefensa: 4
   puntosVictoria: 2
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 10
 --- !u!58 &2071843414
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25856,6 +27168,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2083258763
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26005,6 +27319,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2086925088
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26154,6 +27470,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2088527377
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26303,6 +27621,8 @@ MonoBehaviour:
   bonusDefensa: 0
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2124101398
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26452,6 +27772,8 @@ MonoBehaviour:
   bonusDefensa: 1
   puntosVictoria: 0
   esEstructuraProduccion: 0
+  propietario: 2
+  influenciaTerreno: 0
 --- !u!58 &2136191220
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26547,6 +27869,80 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &337814095415772834
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 854204249}
+    m_Modifications:
+    - target: {fileID: 3777033892559975859, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Name
+      value: SprieCuartel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Color.b
+      value: 0.051886797
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Color.g
+      value: 0.051886797
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749698904431861431, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+--- !u!4 &337814095415772835 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5463197741415266088, guid: 39fb9f9db99c0ab4d8585b0eaf60b889, type: 3}
+  m_PrefabInstance: {fileID: 337814095415772834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5237142607340781490
 PrefabInstance:
   m_ObjectHideFlags: 0

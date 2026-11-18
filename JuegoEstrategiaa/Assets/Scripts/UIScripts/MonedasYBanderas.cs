@@ -64,6 +64,16 @@ public class MonedasYBanderas : MonoBehaviour
         dibujo.GetComponent<SpriteRenderer>().sprite = spriteBanderaAzul;
     }
 
+    // Resta monedas si hay suficientes. Devuelve true si se ha podido pagar.
+    public bool Gastar(int cantidad)
+    {
+        if (monedas < cantidad) return false;
+
+        monedas -= cantidad;
+        ActualizarTextos();
+        return true;
+    }
+
     private void ActualizarTextos()
     {
         textoMonedas.text = monedas.ToString();
