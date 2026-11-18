@@ -31,6 +31,7 @@ public class Unidad : MonoBehaviour
     public HexCelda CeldaActual => celdaActual;
     public bool EnMovimiento => enMovimiento;
     public HexGridGenerator Tablero => tablero;
+    public int Coste => coste;
 
     [Header("Terreno favorito)")]
     [SerializeField] private TipoTerreno terrenoFavorito = TipoTerreno.Llanura;
@@ -71,6 +72,13 @@ public class Unidad : MonoBehaviour
     {
         Todas.Add(this);
         propietario = (jugadorId == 0) ? Propietario.Jugador : Propietario.IA;
+    }
+
+    // Para elegir donde aparece una unidad creada desde un cuartel.
+    // Hay que llamarla justo despues de crearla (antes de que se ejecute Start).
+    public void EstablecerCoordenadaInicial(Vector2Int coordenada)
+    {
+        coordenadaInicial = coordenada;
     }
 
     protected virtual void OnDestroy()

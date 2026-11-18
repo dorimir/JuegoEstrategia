@@ -105,7 +105,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unidad
   jugadorId: 0
+  propietario: 0
   tablero: {fileID: 0}
   velocidad: 3
   coordenadaInicial: {x: 0, y: 0}
   rangoMovimientoCasillas: 2
+  terrenoFavorito: 0
+  terrenoPenalizado: 2
+  coste: 2
+  puntosAtaque: 1
+  puntosDefensa: 1
+  influenciaTropa: 10
+  alcanceAtaque: 1
+  tipoAtaque: 1
