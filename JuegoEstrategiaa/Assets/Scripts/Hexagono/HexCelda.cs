@@ -27,6 +27,7 @@ public enum Propietario
     IA,
     Nadie
 }
+
 public class HexCelda : MonoBehaviour
 {
     [Header("Coordenadas Axiales")]
@@ -41,13 +42,16 @@ public class HexCelda : MonoBehaviour
     public int puntosVictoria = 0;
     public bool esEstructuraProduccion = false;
 
+    public Propietario propietario = Propietario.Nadie;
+    public int influenciaTerreno = 0;
+
     private SpriteRenderer spriteRenderer;
     private Color colorOriginal;
     private bool estaSeleccionada = false;
     private bool estaSobreVolando = false;
     private bool estaEnRango = false;
-
-    public Propietario propietario = Propietario.Nadie;
+    private bool mostrarInfluencia = false;
+    private Color colorInfluencia;
 
     private void Awake()
     {
@@ -73,46 +77,50 @@ public class HexCelda : MonoBehaviour
             case TipoTerreno.Bosque:
                 costeMovimiento = 2;
                 bonusDefensa = 1;
+                influenciaTerreno = 0;
                 colorOriginal = new Color(0.2f, 0.7f, 0.2f);
                 break;
             case TipoTerreno.Montana:
                 costeMovimiento = 3;
                 bonusDefensa = 1;
+                influenciaTerreno = 0;
                 colorOriginal = new Color(0.5f, 0.5f, 0.5f);
                 break;
             case TipoTerreno.Agua:
                 costeMovimiento = 999;
                 bonusDefensa = 0;
+                influenciaTerreno = 0;
                 colorOriginal = new Color(0.2f, 0.4f, 0.8f);
                 break;
             case TipoTerreno.Cuartel:
                 costeMovimiento = 1;
                 bonusDefensa = 1;
+                influenciaTerreno = 5;
                 colorOriginal = new Color(0.0f, 0.0f, 0.0f);
                 break;
             case TipoTerreno.Bandera:
                 costeMovimiento = 0;
                 bonusDefensa = 2;
                 puntosVictoria = 1;
+                influenciaTerreno = 8;
                 colorOriginal = new Color(1.0f, 0.0f, 0.0f);
                 break;
             case TipoTerreno.BanderaCentral:
                 costeMovimiento = 0;
                 bonusDefensa = 4;
                 puntosVictoria = 2;
+                influenciaTerreno = 10;
                 colorOriginal = new Color(1.0f, 0.0f, 0.2f);
                 break;
             default: // Llanura / Desierto
                 costeMovimiento = 1;
                 bonusDefensa = 0;
+                influenciaTerreno = 0;
                 colorOriginal = new Color(0.8f, 0.8f, 0.4f);
                 break;
         }
 
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = colorOriginal;
-        }
+        ActualizarVisualizacion();
     }
 
     private void OnMouseEnter()
@@ -164,8 +172,21 @@ public class HexCelda : MonoBehaviour
         ActualizarVisualizacion();
     }
 
+    public void EstablecerColorInfluencia(Color color)
+    {
+        mostrarInfluencia = true;
+        colorInfluencia = color;
+        ActualizarVisualizacion();
+    }
+
+    public void LimpiarColorInfluencia()
+    {
+        mostrarInfluencia = false;
+        ActualizarVisualizacion();
+    }
+
     /// <summary>
-    /// Prioridad visual: Selección > Hover > En Rango > Normal
+    /// Prioridad visual: Selección > Hover > En Rango > Mapa de Influencia > Normal
     /// </summary>
     private void ActualizarVisualizacion()
     {
@@ -181,8 +202,11 @@ public class HexCelda : MonoBehaviour
         }
         else if (estaEnRango)
         {
-            // Color para casillas alcanzables (tinte cian/brillante)
             spriteRenderer.color = Color.Lerp(colorOriginal, Color.cyan, 0.5f);
+        }
+        else if (mostrarInfluencia)
+        {
+            spriteRenderer.color = colorInfluencia;
         }
         else
         {
