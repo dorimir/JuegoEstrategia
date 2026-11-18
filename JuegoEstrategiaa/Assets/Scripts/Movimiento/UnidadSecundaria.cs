@@ -32,7 +32,7 @@ public class UnidadSecundaria : Unidad
     {
         foreach (Unidad unidad in Todas)
         {
-            if (unidad is UnidadSecundaria reno && reno.jugadorId == unidadQueAlerta.jugadorId)
+            if (unidad is UnidadSecundaria_aliado reno && reno.jugadorId == unidadQueAlerta.jugadorId)
             {
                 reno.AccionDefensaGrupal(unidadQueAlerta);
             }
@@ -117,7 +117,7 @@ public class UnidadSecundaria : Unidad
     {
         foreach (Unidad unidad in Todas)
         {
-            if (unidad is UnidadSecundaria reno)
+            if (unidad is UnidadSecundaria_aliado reno)
             {
                 reno.ResetearDefensaExtra();
             }
