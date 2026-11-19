@@ -93,7 +93,7 @@ public class UnidadSecundaria : Unidad
             yield break;
         }
 
-        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, mejorCeldaDestino, mapa);
+        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, mejorCeldaDestino, mapa, jugadorId, esAtaque:esAtaque);
         if (camino == null || camino.Count < 2) yield break;
 
         MoverPorCamino(camino);

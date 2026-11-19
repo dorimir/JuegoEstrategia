@@ -53,6 +53,9 @@ public class Unidad : MonoBehaviour
     [Tooltip("Peso de influencia que proyecta esta tropa en el mapa de influencia")]
     public int influenciaTropa = 10;
 
+    [Header("Debug / Temporal")]
+    public bool esAtaque = false;
+
     public enum TipoAtaque : int
     {
         Rectas = 1,
@@ -238,7 +241,7 @@ public class Unidad : MonoBehaviour
             return;
         }
 
-        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas());
+        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas(), jugadorId, esAtaque: esAtaque);
         if (camino == null || camino.Count < 2) return;
 
         LimpiarResaltadoRango();

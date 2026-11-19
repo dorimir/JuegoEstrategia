@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class AEstrella
 {
-    public static List<HexCelda> BuscarCamino(HexCelda inicio, HexCelda destino, Dictionary<Vector2Int, HexCelda> mapa)
+    public static List<HexCelda> BuscarCamino(HexCelda inicio, HexCelda destino, Dictionary<Vector2Int, HexCelda> mapa, int jugadorId = 0, float pesoEstructuras = 2f, bool esAtaque = false)
     {
         List<NodoA> abierta = new List<NodoA>();
         List<HexCelda> cerrada = new List<HexCelda>();
@@ -35,8 +35,28 @@ public static class AEstrella
                 // Infranqueables (ej. Agua 999) o ya visitadas
                 if (vecino.costeMovimiento >= 999 || cerrada.Contains(vecino)) continue;
 
+                //Calculating total costs 
+
+                float influenciaTropasEnemiga = 0f;
+                if (InfluenceMapManager.Instancia != null)
+                {
+                    TipoMapaInfluencia capaEnemiga = (jugadorId == 0) ? TipoMapaInfluencia.TropasIA : TipoMapaInfluencia.TropasJugador;
+                    influenciaTropasEnemiga = InfluenceMapManager.Instancia.ObtenerValor(capaEnemiga, vecino);
+                }
+                int penalizacionRiesgoTropas = Mathf.RoundToInt(influenciaTropasEnemiga * 4f);
+                float influenciaEstructurasEnemigas = 0f;
+                if (!esAtaque && InfluenceMapManager.Instancia != null && pesoEstructuras > 0f)
+                {
+                    TipoMapaInfluencia capaEstructurasEnemigas = (jugadorId == 0)
+                        ? TipoMapaInfluencia.EstructurasIA
+                        : TipoMapaInfluencia.EstructurasJugador;
+                    influenciaEstructurasEnemigas = InfluenceMapManager.Instancia.ObtenerValor(capaEstructurasEnemigas, vecino);
+                }
+
+                int penalizacionEstructuras = Mathf.RoundToInt(influenciaEstructurasEnemigas * pesoEstructuras);
+                int nuevoG = actual.g + vecino.costeMovimiento + penalizacionRiesgoTropas + penalizacionEstructuras;
+
                 // Mantiene el coste del terreno para elegir la RUTA MÁS ÓPTIMA
-                int nuevoG = actual.g + vecino.costeMovimiento;
 
                 NodoA existente = null;
                 foreach (NodoA n in abierta)
