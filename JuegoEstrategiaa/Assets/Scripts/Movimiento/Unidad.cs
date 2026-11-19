@@ -16,6 +16,11 @@ public class Unidad : MonoBehaviour
     public int jugadorId = 0;
     public Propietario propietario = Propietario.Jugador;
 
+    [Header("Pesos de Ruta / Influencia")]
+    public float pesoMovimiento = 1f;
+    public float pesoTropas = 4f;
+    public float pesoEstructuras = 2f;
+
     [Header("Configuraci�n")]
     [SerializeField] protected HexGridGenerator tablero;
     [SerializeField] private float velocidad = 3f;
@@ -241,7 +246,7 @@ public class Unidad : MonoBehaviour
             return;
         }
 
-        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas(), jugadorId, esAtaque: esAtaque);
+        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas(), jugadorId, esAtaque: esAtaque, pesoMovimiento: pesoMovimiento, pesoTropas: pesoTropas);
         if (camino == null || camino.Count < 2) return;
 
         LimpiarResaltadoRango();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class AEstrella
 {
-    public static List<HexCelda> BuscarCamino(HexCelda inicio, HexCelda destino, Dictionary<Vector2Int, HexCelda> mapa, int jugadorId = 0, float pesoEstructuras = 2f, bool esAtaque = false)
+    public static List<HexCelda> BuscarCamino(HexCelda inicio, HexCelda destino, Dictionary<Vector2Int, HexCelda> mapa, int jugadorId = 0, float pesoEstructuras = 2f, bool esAtaque = false, float pesoMovimiento = 1f, float pesoTropas = 4f)
     {
         List<NodoA> abierta = new List<NodoA>();
         List<HexCelda> cerrada = new List<HexCelda>();
@@ -38,13 +38,15 @@ public static class AEstrella
                 //Calculating total costs 
 
                 float influenciaTropasEnemiga = 0f;
-                if (InfluenceMapManager.Instancia != null)
+                if (InfluenceMapManager.Instancia != null && pesoTropas > 0f)
                 {
                     TipoMapaInfluencia capaEnemiga = (jugadorId == 0) ? TipoMapaInfluencia.TropasIA : TipoMapaInfluencia.TropasJugador;
                     influenciaTropasEnemiga = InfluenceMapManager.Instancia.ObtenerValor(capaEnemiga, vecino);
                 }
-                int penalizacionRiesgoTropas = Mathf.RoundToInt(influenciaTropasEnemiga * 4f);
+
+                int penalizacionRiesgoTropas = Mathf.RoundToInt(influenciaTropasEnemiga * pesoTropas);
                 float influenciaEstructurasEnemigas = 0f;
+
                 if (!esAtaque && InfluenceMapManager.Instancia != null && pesoEstructuras > 0f)
                 {
                     TipoMapaInfluencia capaEstructurasEnemigas = (jugadorId == 0)
@@ -54,7 +56,14 @@ public static class AEstrella
                 }
 
                 int penalizacionEstructuras = Mathf.RoundToInt(influenciaEstructurasEnemigas * pesoEstructuras);
-                int nuevoG = actual.g + vecino.costeMovimiento + penalizacionRiesgoTropas + penalizacionEstructuras;
+                int costeTerreno = Mathf.RoundToInt(vecino.costeMovimiento * pesoMovimiento);
+
+                int nuevoG = actual.g + costeTerreno + penalizacionRiesgoTropas + penalizacionEstructuras;
+
+                if (influenciaTropasEnemiga > 0f)
+                {
+                    Debug.Log($"[AEstrella] Vecino ({vecino.q}, {vecino.r}) | terreno={vecino.costeMovimiento} (x{pesoMovimiento}={costeTerreno}) | infTropas={influenciaTropasEnemiga} -> penTropas={penalizacionRiesgoTropas} | penEst={penalizacionEstructuras} | nuevoG={nuevoG}");
+                }
 
                 // Mantiene el coste del terreno para elegir la RUTA MÁS ÓPTIMA
 
