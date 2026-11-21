@@ -7,7 +7,7 @@ public class TurnManager : MonoBehaviour
     public static TurnManager Instancia { get; private set; }
 
     [SerializeField] private int numeroJugadores = 2;
-    [Tooltip("Índices de los jugadores controlados por la IA (0 = Jugador 1, 1 = Jugador 2...)")]
+    [Tooltip("ï¿½ndices de los jugadores controlados por la IA (0 = Jugador 1, 1 = Jugador 2...)")]
     [SerializeField] private List<int> jugadoresIA = new List<int> { 1 };
 
     public int JugadorActual { get; private set; } = 0;
@@ -31,16 +31,27 @@ public class TurnManager : MonoBehaviour
     private void Update()
     {
         // El humano solo puede pasar turno en SU turno
-        if (!TurnoDeIA && Input.GetKeyDown(KeyCode.Space)) FinalizarTurno();
+        if (!TurnoDeIA && Input.GetKeyDown(KeyCode.Space)) 
+        {
+            Debug.Log("[TurnManager] Space pressed - Attempting to end turn.");
+            FinalizarTurno();
+        }
     }
 
     public void FinalizarTurno()
     {
-        // No se puede pasar turno mientras una unidad se está moviendo
-        if (Unidad.HayAlguienMoviendose()) return;
+        // No se puede pasar turno mientras una unidad se est moviendo
+        if (Unidad.HayAlguienMoviendose()) 
+        {
+            Debug.Log("[TurnManager] Cannot end turn: A unit is still moving.");
+            return;
+        }
 
+        int anterior = JugadorActual;
         JugadorActual = (JugadorActual + 1) % numeroJugadores;
         if (JugadorActual == 0) NumeroTurno++;
+
+        Debug.Log($"[TurnManager] Turn changed from Player {anterior + 1} to Player {JugadorActual + 1}.");
 
         IniciarTurno();
     }

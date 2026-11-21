@@ -9,8 +9,13 @@ public class EnemigoIA : MonoBehaviour
     [SerializeField] private float retardoInicio = 0.5f; // pausa antes de mover
     [SerializeField] private float pausaFinal = 0.5f;    // pausa antes de pasar turno
 
+    [Header("Spawning AI")]
+    [SerializeField] private List<Unidad> prefabsDisponibles; // Lista de unidades que la IA puede spawnear
+    [SerializeField] private HexGridGenerator tablero;
+
     private void Start()
     {
+        if (tablero == null) tablero = FindObjectOfType<HexGridGenerator>();
         TurnManager.Instancia.OnTurnoIniciado += AlIniciarTurno;
     }
 
@@ -31,6 +36,11 @@ public class EnemigoIA : MonoBehaviour
     {
         yield return new WaitForSeconds(retardoInicio);
 
+        // --- FASE DE SPAWN (Automático) ---
+        EjecutarFaseSpawn(jugador);
+        yield return new WaitForSeconds(0.5f); // Pausa tras spawnear
+
+        // --- FASE DE MOVIMIENTO ---
         // Copia de la lista por si cambia durante el turno
         foreach (Unidad unidad in new List<Unidad>(Unidad.Todas))
         {
@@ -56,6 +66,44 @@ public class EnemigoIA : MonoBehaviour
 
         yield return new WaitForSeconds(pausaFinal);
         TurnManager.Instancia.FinalizarTurno();
+    }
+
+    private void EjecutarFaseSpawn(int jugadorId)
+    {
+        if (prefabsDisponibles == null || prefabsDisponibles.Count == 0 || tablero == null) return;
+
+        // 1. Encontrar cuarteles de la IA
+        foreach (HexCelda celda in tablero.ObtenerMapaCeldas().Values)
+        {
+            if (celda.terreno == TipoTerreno.Cuartel && celda.propietario == Propietario.IA)
+            {
+                IntentarSpawnearEnCuartel(celda, jugadorId);
+            }
+        }
+    }
+
+    private void IntentarSpawnearEnCuartel(HexCelda cuartel, int jugadorId)
+    {
+        // 2. Obtener vecinos libres
+        List<HexCelda> vecinosLibres = new List<HexCelda>();
+        Vector2Int coord = new Vector2Int(cuartel.q, cuartel.r);
+        
+        foreach (HexCelda vecina in HexGridUtils.ObtenerVecinos(coord, tablero.ObtenerMapaCeldas()))
+        {
+            if (vecina.costeMovimiento < 999 && Unidad.EnCelda(vecina) == null)
+            {
+                vecinosLibres.Add(vecina);
+            }
+        }
+
+        if (vecinosLibres.Count == 0) return;
+
+        // 3. Elección aleatoria de unidad y posición
+        Unidad prefabElegido = prefabsDisponibles[Random.Range(0, prefabsDisponibles.Count)];
+        HexCelda celdaElegida = vecinosLibres[Random.Range(0, vecinosLibres.Count)];
+
+        // 4. Intentar spawnear (el SpawnManager valida el dinero)
+        SpawnManager.Instancia.SpawnearUnidad(prefabElegido, celdaElegida, jugadorId);
     }
 
     private Unidad BuscarObjetivoMasCercano(Unidad yo)

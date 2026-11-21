@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class BotonTropa : MonoBehaviour
 {
-    [SerializeField] private Unidad tropa;               // prefab de la tropa que se compra
+    [SerializeField] public Unidad tropa;               // prefab de la tropa que se compra
     [SerializeField] private TextMeshProUGUI textoPrecio;
     [SerializeField] private Color colorSinSaldo = Color.red;
 
@@ -30,7 +30,7 @@ public class BotonTropa : MonoBehaviour
     {
         textoPrecio.text = tropa.Coste.ToString();
 
-        bool tengoSaldo = MonedasYBanderas.Instancia.Monedas >= tropa.Coste;
+        bool tengoSaldo = MonedasYBanderas.Instancia.GetMonedas(0) >= tropa.Coste;
         textoPrecio.color = tengoSaldo ? colorNormal : colorSinSaldo;
     }
 

@@ -125,6 +125,11 @@ public class Unidad : MonoBehaviour
             //si tenemos una celda actual, nos colocamos en ella
             if (celdaActual != null) transform.position = celdaActual.transform.position + Vector3.back;
         }
+
+        /*if (!gameObject.CompareTag("MainUnit"))
+        {
+            gameObject.SetActive(false);
+        }*/
     }
 
     // ---------- Gesti�n de Selecci�n y Resaltado ----------
@@ -246,7 +251,7 @@ public class Unidad : MonoBehaviour
             return;
         }
 
-        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas(), jugadorId, esAtaque: esAtaque, pesoMovimiento: pesoMovimiento, pesoTropas: pesoTropas);
+        List<HexCelda> camino = AEstrella.BuscarCamino(celdaActual, destino, tablero.ObtenerMapaCeldas(), jugadorId, esAtaque: esAtaque, pesoEstructuras: pesoEstructuras, pesoMovimiento: pesoMovimiento, pesoTropas: pesoTropas);
         if (camino == null || camino.Count < 2) return;
 
         LimpiarResaltadoRango();
