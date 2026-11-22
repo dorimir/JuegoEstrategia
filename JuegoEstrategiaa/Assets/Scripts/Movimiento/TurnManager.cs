@@ -43,7 +43,14 @@ public class TurnManager : MonoBehaviour
         // No se puede pasar turno mientras una unidad se est moviendo
         if (Unidad.HayAlguienMoviendose()) 
         {
-            Debug.Log("[TurnManager] Cannot end turn: A unit is still moving.");
+            foreach (Unidad u in Unidad.Todas)
+            {
+                if (u != null && u.EnMovimiento) 
+                {
+                    Debug.LogWarning($"[TurnManager] Unit blocking turn end: {u.name} (active={u.gameObject.activeInHierarchy}, jugadorId={u.jugadorId})");
+                }
+            }
+            //Debug.Log("[TurnManager] Cannot end turn: A unit is still moving.");
             return;
         }
 

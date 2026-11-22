@@ -52,7 +52,7 @@ public class Unidad : MonoBehaviour
     [SerializeField] private int puntosAtaque = 1;
 
     [Header("Puntos de Defensa")]
-    [SerializeField] private int puntosDefensa = 1;
+    [SerializeField] public int puntosDefensa = 1;
 
     [Header("Influencia Táctica")]
     [Tooltip("Peso de influencia que proyecta esta tropa en el mapa de influencia")]
@@ -93,6 +93,7 @@ public class Unidad : MonoBehaviour
     {
         Todas.Remove(this);
         if (Seleccionada == this) Deseleccionar();
+        enMovimiento = false;
     }
 
     protected IEnumerator Start()
@@ -126,10 +127,6 @@ public class Unidad : MonoBehaviour
             if (celdaActual != null) transform.position = celdaActual.transform.position + Vector3.back;
         }
 
-        /*if (!gameObject.CompareTag("MainUnit"))
-        {
-            gameObject.SetActive(false);
-        }*/
     }
 
     // ---------- Gesti�n de Selecci�n y Resaltado ----------

@@ -100,6 +100,7 @@ public class SpawnManager : MonoBehaviour
         nueva.jugadorId = jugadorId;
         nueva.propietario = (jugadorId == 0) ? Propietario.Jugador : Propietario.IA;
         nueva.EstablecerCoordenadaInicial(new Vector2Int(celda.q, celda.r));
+        nueva.gameObject.SetActive(true);
 
         Debug.Log($"[SpawnManager] Jugador {jugadorId} ha spawneado {prefab.name} en ({celda.q}, {celda.r}).");
         return true;
@@ -220,6 +221,7 @@ public class SpawnManager : MonoBehaviour
                 unidad.MoverPorCamino(camino);
             }
         }
+
     }
 
     private List<HexCelda> ObtenerCeldasAlcanzablesLibres(HexCelda origen, int rango, Dictionary<Vector2Int, HexCelda> mapa)

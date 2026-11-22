@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UnidadSecundaria_aliado : Unidad
+public class UnidadSecundaria : Unidad
 {
     [Header("Configuración de Manada (Reno)")]
     [SerializeField] private float radioDeOido = 6f;
@@ -32,16 +32,22 @@ public class UnidadSecundaria_aliado : Unidad
     {
         foreach (Unidad unidad in Todas)
         {
-            if (unidad is UnidadSecundaria_aliado reno && reno.jugadorId == unidadQueAlerta.jugadorId)
+            if (unidad is UnidadSecundaria reno && reno.jugadorId == unidadQueAlerta.jugadorId)
             {
                 reno.AccionDefensaGrupal(unidadQueAlerta);
             }
         }
     }
 
+    private int defensaAplicadaAUnidadAlerta = 0;
+
     public void AccionDefensaGrupal(Unidad unidadAlerta)
     {
-        if (unidadAlerta == null || CeldaActual == null || unidadAlerta.CeldaActual == null) Debug.Log($"Something is NULL"); ;
+        if (unidadAlerta == null || CeldaActual == null || unidadAlerta.CeldaActual == null)
+        {
+            Debug.LogWarning($"{name}: AccionDefensaGrupal cancelled because a unit or cell is null.");
+            return;
+        }
 
         float distanciaMundo = Vector3.Distance(transform.position, unidadAlerta.transform.position);
         if (distanciaMundo > radioDeOido) return;
@@ -51,17 +57,29 @@ public class UnidadSecundaria_aliado : Unidad
 
         if (distanciaCasillas <= rangoMovimientoCasillas)
         {
-            unidadEnAlerta = unidadAlerta;
+            // Si ya había una alerta previa en este turno, revertir primero
+            ResetearDefensaExtra();
 
+            unidadEnAlerta = unidadAlerta;
             defensaExtraTurno += defensaBase;
+            defensaAplicadaAUnidadAlerta = defensaExtraTurno;
+
+            // Sumar defensaExtraTurno a los puntosDefensa de la unidad alertada (Santa)
+            unidadAlerta.puntosDefensa += defensaExtraTurno;
+
             StartCoroutine(EjecutarMovimientoReaccion(unidadAlerta.CeldaActual));
         }
-        }
+    }
 
     private IEnumerator EjecutarMovimientoReaccion(HexCelda celdaDestino)
     {
         HexCelda celdaSanta = unidadEnAlerta.CeldaActual;
         Debug.Log($"{gameObject.name} reacciona a la alarma y corre a proteger a su aliado.");
+
+        if (tablero == null)
+        {
+            tablero = FindAnyObjectByType<HexGridGenerator>();
+        }
 
         if (tablero == null) yield break;
         Dictionary<Vector2Int, HexCelda> mapa = tablero.ObtenerMapaCeldas();
@@ -109,6 +127,12 @@ public class UnidadSecundaria_aliado : Unidad
 
     public void ResetearDefensaExtra()
     {
+        if (unidadEnAlerta != null && defensaAplicadaAUnidadAlerta != 0)
+        {
+            unidadEnAlerta.puntosDefensa -= defensaAplicadaAUnidadAlerta;
+        }
+
+        defensaAplicadaAUnidadAlerta = 0;
         defensaExtraTurno = 0;
         unidadEnAlerta = null;
     }
@@ -117,7 +141,7 @@ public class UnidadSecundaria_aliado : Unidad
     {
         foreach (Unidad unidad in Todas)
         {
-            if (unidad is UnidadSecundaria_aliado reno)
+            if (unidad is UnidadSecundaria reno)
             {
                 reno.ResetearDefensaExtra();
             }
