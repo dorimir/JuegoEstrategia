@@ -37,32 +37,37 @@ public static class AEstrella
 
                 //Calculating total costs 
 
-                float influenciaTropasEnemiga = 0f;
+                float influenciaFusionadaTropas = 0f;
                 if (InfluenceMapManager.Instancia != null && pesoTropas > 0f)
                 {
-                    TipoMapaInfluencia capaEnemiga = (jugadorId == 0) ? TipoMapaInfluencia.TropasIA : TipoMapaInfluencia.TropasJugador;
-                    influenciaTropasEnemiga = InfluenceMapManager.Instancia.ObtenerValor(capaEnemiga, vecino);
+                    float rawTropas = InfluenceMapManager.Instancia.ObtenerValor(TipoMapaInfluencia.TropasFusionado, vecino);
+
+                    // Si es Jugador (0), valores negativos son ventaja de la IA (riesgo).
+                    // Si es IA (1), valores positivos son ventaja del Jugador (riesgo).
+                    influenciaFusionadaTropas = (jugadorId == 0) ? -rawTropas : rawTropas;
                 }
 
-                int penalizacionRiesgoTropas = Mathf.RoundToInt(influenciaTropasEnemiga * pesoTropas);
-                float influenciaEstructurasEnemigas = 0f;
+                // Opcional: usa Mathf.Max(0f, influenciaFusionadaTropas) si solo quieres penalizar
+                // cuando el enemigo tiene ventaja neta y no dar bonificación cuando hay ventaja aliada.
+                int penalizacionRiesgoTropas = Mathf.RoundToInt(influenciaFusionadaTropas * pesoTropas);
 
+                float influenciaFusionadaEstructuras = 0f;
                 if (!esAtaque && InfluenceMapManager.Instancia != null && pesoEstructuras > 0f)
                 {
-                    TipoMapaInfluencia capaEstructurasEnemigas = (jugadorId == 0)
-                        ? TipoMapaInfluencia.EstructurasIA
-                        : TipoMapaInfluencia.EstructurasJugador;
-                    influenciaEstructurasEnemigas = InfluenceMapManager.Instancia.ObtenerValor(capaEstructurasEnemigas, vecino);
+                    float rawEstructuras = InfluenceMapManager.Instancia.ObtenerValor(TipoMapaInfluencia.EstructurasFusionado, vecino);
+                    influenciaFusionadaEstructuras = (jugadorId == 0) ? -rawEstructuras : rawEstructuras;
                 }
 
-                int penalizacionEstructuras = Mathf.RoundToInt(influenciaEstructurasEnemigas * pesoEstructuras);
+                int penalizacionEstructuras = Mathf.RoundToInt(influenciaFusionadaEstructuras * pesoEstructuras);
                 int costeTerreno = Mathf.RoundToInt(vecino.costeMovimiento * pesoMovimiento);
 
-                int nuevoG = actual.g + costeTerreno + penalizacionRiesgoTropas + penalizacionEstructuras;
+                // Evita costes negativos o cero en un paso para no romper la búsqueda del camino
+                int costePaso = Mathf.Max(1, costeTerreno + penalizacionRiesgoTropas + penalizacionEstructuras);
+                int nuevoG = actual.g + costePaso;
 
-                if (influenciaTropasEnemiga > 0f)
+                if (influenciaFusionadaTropas > 0f)
                 {
-                    Debug.Log($"[AEstrella] Vecino ({vecino.q}, {vecino.r}) | terreno={vecino.costeMovimiento} (x{pesoMovimiento}={costeTerreno}) | infTropas={influenciaTropasEnemiga} -> penTropas={penalizacionRiesgoTropas} | penEst={penalizacionEstructuras} | nuevoG={nuevoG}");
+                    Debug.Log($"[AEstrella] Vecino ({vecino.q}, {vecino.r}) | terreno={vecino.costeMovimiento} (x{pesoMovimiento}={costeTerreno}) | infTropasFus={influenciaFusionadaTropas} -> penTropas={penalizacionRiesgoTropas} | penEst={penalizacionEstructuras} | nuevoG={nuevoG}");
                 }
 
                 // Mantiene el coste del terreno para elegir la RUTA MÁS ÓPTIMA

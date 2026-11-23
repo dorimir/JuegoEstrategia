@@ -107,7 +107,7 @@ MonoBehaviour:
   jugadorId: 0
   propietario: 0
   pesoMovimiento: 1
-  pesoTropas: 4
+  pesoTropas: 3.5
   pesoEstructuras: 2
   tablero: {fileID: 0}
   velocidad: 3
@@ -118,7 +118,7 @@ MonoBehaviour:
   coste: 2
   puntosAtaque: 1
   puntosDefensa: 1
-  influenciaTropa: 10
+  influenciaTropa: 4
   esAtaque: 0
   alcanceAtaque: 1
   tipoAtaque: 1

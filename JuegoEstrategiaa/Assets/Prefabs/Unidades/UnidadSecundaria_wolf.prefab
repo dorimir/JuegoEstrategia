@@ -110,7 +110,7 @@ MonoBehaviour:
   pesoTropas: 2.7
   pesoEstructuras: 2
   tablero: {fileID: 0}
-  velocidad: 5
+  velocidad: 6
   coordenadaInicial: {x: 0, y: 0}
   rangoMovimientoCasillas: 2
   terrenoFavorito: 0

@@ -56,7 +56,7 @@ public class Unidad : MonoBehaviour
 
     [Header("Influencia Táctica")]
     [Tooltip("Peso de influencia que proyecta esta tropa en el mapa de influencia")]
-    public int influenciaTropa = 10;
+    public int influenciaTropa = 5;
 
     [Header("Debug / Temporal")]
     public bool esAtaque = false;
@@ -280,5 +280,10 @@ public class Unidad : MonoBehaviour
 
         enMovimiento = false;
         Deseleccionar();
+
+        if (InfluenceMapManager.Instancia != null)
+        {
+            InfluenceMapManager.Instancia.ActualizarTodosLosMapas();
+        }
     }
 }

@@ -106,11 +106,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnidadSecundaria
   jugadorId: 0
   propietario: 0
-  pesoMovimiento: 1
-  pesoTropas: 4
+  pesoMovimiento: 2.5
+  pesoTropas: 6
   pesoEstructuras: 2
   tablero: {fileID: 0}
-  velocidad: 3
+  velocidad: 5
   coordenadaInicial: {x: 0, y: 0}
   rangoMovimientoCasillas: 4
   terrenoFavorito: 0

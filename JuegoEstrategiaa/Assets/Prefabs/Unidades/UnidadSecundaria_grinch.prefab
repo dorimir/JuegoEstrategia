@@ -107,7 +107,7 @@ MonoBehaviour:
   jugadorId: 1
   propietario: 1
   pesoMovimiento: 1
-  pesoTropas: 4
+  pesoTropas: 3
   pesoEstructuras: 2
   tablero: {fileID: 0}
   velocidad: 3
