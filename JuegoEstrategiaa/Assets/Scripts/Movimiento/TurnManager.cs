@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -76,10 +75,8 @@ public class TurnManager : MonoBehaviour
     private readonly Dictionary<int, Dictionary<TipoRecurso, int>> recursosPorJugador = new Dictionary<int, Dictionary<TipoRecurso, int>>();
     private readonly Dictionary<int, int> monedasPorJugador = new Dictionary<int, int>();
 
-    // Acceso reflection seguro y cacheado para campos privados de Unidad
-    private static readonly FieldInfo campoPuntosAtaque = typeof(Unidad).GetField("puntosAtaque", BindingFlags.NonPublic | BindingFlags.Instance);
-    private static readonly FieldInfo campoAlcanceAtaque = typeof(Unidad).GetField("alcanceAtaque", BindingFlags.NonPublic | BindingFlags.Instance);
-    private static readonly FieldInfo campoTerrenoFavorito = typeof(Unidad).GetField("terrenoFavorito", BindingFlags.NonPublic | BindingFlags.Instance);
+    /// <summary>Ataques declarados esta fase (lo usa CombateManager para dibujar flechas y previsualizar).</summary>
+    public IReadOnlyList<DeclaracionAtaque> AtaquesDeclarados => ataquesDeclarados;
 
     private Coroutine corrutinaFaseActiva;
     private bool procesandoFaseAutomatica = false;
@@ -690,39 +687,40 @@ public class TurnManager : MonoBehaviour
 
     private void DetectarClicAtaque()
     {
-        if (SelectionManager.Instancia == null) return;
+        Unidad atacante = Unidad.Seleccionada;
+        if (atacante == null || atacante.jugadorId != JugadorActual) return;
 
-        HexCelda celdaSeleccionada = SelectionManager.Instancia.celdaSeleccionada;
-        if (celdaSeleccionada == null) return;
+        // Unidad enemiga bajo el ratón (no depende de la selección de casilla)
+        Unidad objetivo = CombateManager.UnidadBajoRaton();
+        if (objetivo == null || objetivo.jugadorId == JugadorActual) return;
 
-        Unidad enemigo = Unidad.EnCelda(celdaSeleccionada);
-        if (enemigo != null && enemigo.jugadorId != JugadorActual && Unidad.Seleccionada != null)
+        if (TieneAtaqueDeclarado(atacante) && ObtenerObjetivoDeclarado(atacante) == objetivo)
         {
-            Unidad atacante = Unidad.Seleccionada;
-            if (atacante.jugadorId == JugadorActual && EstaEnRangoAtaque(atacante, enemigo))
-            {
-                DeclararAtaque(atacante, enemigo);
-            }
+            // Segundo clic sobre el mismo objetivo: cancela el ataque
+            CancelarAtaque(atacante);
+        }
+        else if (atacante.PuedeAtacar(objetivo))
+        {
+            DeclararAtaque(atacante, objetivo);
         }
     }
 
     public bool EstaEnRangoAtaque(Unidad atacante, Unidad objetivo)
     {
-        if (atacante == null || objetivo == null || atacante.CeldaActual == null || objetivo.CeldaActual == null)
-            return false;
-
-        int alcance = ObtenerAlcanceAtaque(atacante);
-        int dist = HexGridUtils.CalcularDistanciaHex(
-            new Vector2Int(atacante.CeldaActual.q, atacante.CeldaActual.r),
-            new Vector2Int(objetivo.CeldaActual.q, objetivo.CeldaActual.r)
-        );
-
-        return dist <= alcance;
+        if (atacante == null || objetivo == null) return false;
+        return atacante.EstaEnAlcance(objetivo.CeldaActual);
     }
 
     public void DeclararAtaque(Unidad atacante, Unidad objetivo)
     {
         if (atacante == null || objetivo == null) return;
+        if (FaseActual != FaseTurno.Ataque) return;
+
+        if (!atacante.PuedeAtacar(objetivo))
+        {
+            Debug.LogWarning($"[Ataque] {atacante.name} no puede atacar a {objetivo.name} (fuera de alcance, ya atacó o es aliado).");
+            return;
+        }
 
         // Si ya tenía un ataque declarado, lo reemplazamos
         CancelarAtaque(atacante);
@@ -751,26 +749,35 @@ public class TurnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(pausaAccionIA);
 
-        // La IA decide si atacar o no a los enemigos que tenga a rango
-        foreach (Unidad atacante in Unidad.Todas)
+        foreach (Unidad atacante in new List<Unidad>(Unidad.Todas))
         {
-            if (atacante == null || atacante.jugadorId != JugadorActual || atacante.CeldaActual == null) continue;
+            if (atacante == null || atacante.EstaMuerta || atacante.jugadorId != JugadorActual) continue;
+            if (atacante.CeldaActual == null || atacante.HaAtacado) continue;
 
             Unidad mejorObjetivo = null;
-            int menorDefensa = int.MaxValue;
+            float mejorPuntuacion = 0f; // solo ataca si la puntuación es positiva
 
             foreach (Unidad enemigo in Unidad.Todas)
             {
-                if (enemigo == null || enemigo.jugadorId == JugadorActual || enemigo.CeldaActual == null) continue;
+                if (!atacante.PuedeAtacar(enemigo)) continue;
 
-                if (EstaEnRangoAtaque(atacante, enemigo))
+                int danioPlaneado = DanioPlaneadoSobre(enemigo, atacante);
+
+                // Si los aliados ya lo van a matar, atacar más es desperdiciar el ataque
+                if (enemigo.DanioMarcado + danioPlaneado >= CombateManager.CalcularResistencia(enemigo)) continue;
+
+                ResultadoCombate r = CombateManager.Simular(atacante, enemigo, danioPlaneado, 0);
+
+                float valorEnemigo = CombateManager.CalcularAtaque(enemigo) + CombateManager.CalcularResistencia(enemigo);
+                float valorPropio = CombateManager.CalcularAtaque(atacante) + CombateManager.CalcularResistencia(atacante);
+
+                float puntuacion = r.defensorMuere ? valorEnemigo * 2f : r.ataqueAtacante * 0.5f;
+                puntuacion -= r.atacanteMuere ? valorPropio * 2f : r.ataqueDefensor * 0.5f;
+
+                if (puntuacion > mejorPuntuacion)
                 {
-                    // Decisión táctica: priorizar el enemigo más debilitado para asegurar la baja
-                    if (enemigo.puntosDefensa < menorDefensa)
-                    {
-                        menorDefensa = enemigo.puntosDefensa;
-                        mejorObjetivo = enemigo;
-                    }
+                    mejorPuntuacion = puntuacion;
+                    mejorObjetivo = enemigo;
                 }
             }
 
@@ -784,6 +791,20 @@ public class TurnManager : MonoBehaviour
 
         // Avanzar a resolución automática de combates
         AvanzarFase();
+    }
+
+    /// <summary>Daño que otros atacantes ya han declarado contra este objetivo (para concentrar fuego).</summary>
+    private int DanioPlaneadoSobre(Unidad objetivo, Unidad excepto)
+    {
+        int total = 0;
+        foreach (DeclaracionAtaque d in ataquesDeclarados)
+        {
+            if (d.Objetivo == objetivo && d.Atacante != excepto)
+            {
+                total += CombateManager.CalcularAtaque(d.Atacante);
+            }
+        }
+        return total;
     }
 
     // -------------------------------------------------------------
@@ -804,72 +825,24 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"Resolviendo {ataquesDeclarados.Count} combate(s) de manera automática...");
+            Debug.Log($"Resolviendo {ataquesDeclarados.Count} combate(s)...");
 
-            foreach (DeclaracionAtaque decl in new List<DeclaracionAtaque>(ataquesDeclarados))
-            {
-                Unidad atacante = decl.Atacante;
-                Unidad objetivo = decl.Objetivo;
-
-                if (atacante == null || objetivo == null) continue;
-                if (atacante.CeldaActual == null || objetivo.CeldaActual == null) continue;
-
-                // 1. Calcular ataque con bonificación de terreno
-                int poderAtaque = ObtenerPuntosAtaque(atacante);
-                TipoTerreno terrenoFav = ObtenerTerrenoFavorito(atacante);
-                if (atacante.CeldaActual.terreno == terrenoFav)
-                {
-                    poderAtaque += 1;
-                }
-
-                // 2. Calcular defensa con bonificación de terreno
-                int bonusDefensa = objetivo.CeldaActual.bonusDefensa;
-                int danio = Mathf.Max(1, poderAtaque - (bonusDefensa > 0 ? 1 : 0));
-
-                objetivo.puntosDefensa -= danio;
-
-                string reporte = $"⚔️ {atacante.name} inflige {danio} de daño a {objetivo.name} (Defensa restante: {Mathf.Max(0, objetivo.puntosDefensa)}).";
-                Debug.Log(reporte);
-                ultimosReportesCombate.Add(reporte);
-
-                // 3. Comprobar baja o contraataque
-                if (objetivo.puntosDefensa <= 0)
-                {
-                    string muerte = $"💀 ¡{objetivo.name} ha sido derrotada!";
-                    Debug.Log(muerte);
-                    ultimosReportesCombate.Add(muerte);
-                    Destroy(objetivo.gameObject);
-                }
-                else
-                {
-                    // Si sobrevive y está a rango, contraataca
-                    if (EstaEnRangoAtaque(objetivo, atacante))
-                    {
-                        int contraAtaque = Mathf.Max(1, ObtenerPuntosAtaque(objetivo) / 2);
-                        atacante.puntosDefensa -= contraAtaque;
-
-                        string contra = $"🛡️ {objetivo.name} contraataca infligiendo {contraAtaque} de daño a {atacante.name}!";
-                        Debug.Log(contra);
-                        ultimosReportesCombate.Add(contra);
-
-                        if (atacante.puntosDefensa <= 0)
-                        {
-                            string muerteAtacante = $"💀 ¡{atacante.name} cayó por contraataque!";
-                            Debug.Log(muerteAtacante);
-                            ultimosReportesCombate.Add(muerteAtacante);
-                            Destroy(atacante.gameObject);
-                        }
-                    }
-                }
-
-                yield return new WaitForSeconds(0.3f);
-            }
+            // Daño simultáneo, contraataque y muertes al final (ver CombateManager)
+            yield return CombateManager.Instancia.Resolver(
+                new List<DeclaracionAtaque>(ataquesDeclarados),
+                ultimosReportesCombate
+            );
         }
 
         ataquesDeclarados.Clear();
         OnCombatesResueltos?.Invoke(new List<string>(ultimosReportesCombate));
 
         yield return new WaitForSeconds(pausaFaseAutomatica);
+
+        // Final de turno (como en Magic): el daño marcado desaparece y
+        // los efectos "hasta final de turno" (campana de los renos) terminan.
+        Unidad.LimpiarDanioTodas();
+        UnidadSecundaria.ResetearDefensaDeTodosLosRenos();
 
         procesandoFaseAutomatica = false;
 
@@ -878,37 +851,22 @@ public class TurnManager : MonoBehaviour
     }
 
     // -------------------------------------------------------------
-    // HELPERS DE REFLECTION PARA UNIDAD
+    // HELPERS (compatibilidad: ya no usan reflection)
     // -------------------------------------------------------------
 
     public static int ObtenerPuntosAtaque(Unidad u)
     {
-        if (u == null) return 1;
-        if (campoPuntosAtaque != null)
-        {
-            return (int)campoPuntosAtaque.GetValue(u);
-        }
-        return 1;
+        return u == null ? 0 : CombateManager.CalcularAtaque(u);
     }
 
     public static int ObtenerAlcanceAtaque(Unidad u)
     {
-        if (u == null) return 1;
-        if (campoAlcanceAtaque != null)
-        {
-            return (int)campoAlcanceAtaque.GetValue(u);
-        }
-        return 1;
+        return u == null ? 0 : u.AlcanceAtaque;
     }
 
     public static TipoTerreno ObtenerTerrenoFavorito(Unidad u)
     {
-        if (u == null) return TipoTerreno.Llanura;
-        if (campoTerrenoFavorito != null)
-        {
-            return (TipoTerreno)campoTerrenoFavorito.GetValue(u);
-        }
-        return TipoTerreno.Llanura;
+        return u == null ? TipoTerreno.Llanura : u.TerrenoFavorito;
     }
 
     // -------------------------------------------------------------
@@ -984,7 +942,7 @@ public class TurnManager : MonoBehaviour
                 break;
 
             case FaseTurno.Ataque:
-                GUILayout.Label("<i>Decide si atacar o no a enemigos a rango.</i>");
+                GUILayout.Label("<i>Selecciona tu unidad y haz clic en un enemigo marcado en rojo. Clic otra vez = cancelar.</i>");
                 DibujarSeccionAtaqueGUI();
                 break;
 
@@ -1022,7 +980,7 @@ public class TurnManager : MonoBehaviour
             int alcance = ObtenerAlcanceAtaque(atacante);
             int poder = ObtenerPuntosAtaque(atacante);
 
-            GUILayout.Label($"Atacante: <b>{atacante.name}</b> (Poder: {poder}, Alcance: {alcance})");
+            GUILayout.Label($"Atacante: <b>{atacante.name}</b> (Fuerza: {poder}, Alcance: {alcance}{(atacante.HaAtacado ? ", YA ATACÓ" : "")})");
 
             // Buscar enemigos a rango
             List<Unidad> enemigosEnRango = new List<Unidad>();
@@ -1043,7 +1001,7 @@ public class TurnManager : MonoBehaviour
                 foreach (Unidad enemigo in enemigosEnRango)
                 {
                     bool yaDeclarado = TieneAtaqueDeclarado(atacante) && ObtenerObjetivoDeclarado(atacante) == enemigo;
-                    string texto = yaDeclarado ? $"Atacando a {enemigo.name} (Def: {enemigo.puntosDefensa}) [Declarado]" : $"Atacar a {enemigo.name} (Def: {enemigo.puntosDefensa})";
+                    string texto = yaDeclarado ? $"Atacando a {enemigo.name} ({CombateManager.CalcularAtaque(enemigo)}/{Mathf.Max(0, CombateManager.CalcularResistencia(enemigo) - enemigo.DanioMarcado)}) [Declarado]" : $"Atacar a {enemigo.name} ({CombateManager.CalcularAtaque(enemigo)}/{Mathf.Max(0, CombateManager.CalcularResistencia(enemigo) - enemigo.DanioMarcado)})";
 
                     if (GUILayout.Button(texto))
                     {
